@@ -8,6 +8,6 @@ namespace EbisuWebApi.Domain.RepositoryContracts.Contracts
 {
     public interface IDelete<T> where T : class
     {
-        Task<T> Delete(T entity);
+        Task<T> Delete(int id);
     }
 }

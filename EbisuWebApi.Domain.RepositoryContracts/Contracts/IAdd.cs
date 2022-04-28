@@ -8,6 +8,6 @@ namespace EbisuWebApi.Domain.RepositoryContracts.Contracts
 {
     public interface IAdd<T> where T : class
     {
-        Task<T> Add(int id);
+        Task<T> Add(T entity);
     }
 }
