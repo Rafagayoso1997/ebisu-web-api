@@ -10,6 +10,7 @@
     <ProjectReference Include="..\EbisuWebApi.Domain.Entities\EbisuWebApi.Domain.Entities.csproj" />
     <ProjectReference Include="..\EbisuWebApi.Domain.RepositoryContracts\EbisuWebApi.Domain.RepositoryContracts.csproj" />
     <ProjectReference Include="..\EbisuWebApi.Infrastructure.DataModel\EbisuWebApi.Infrastructure.DataModel.csproj" />
+    <ProjectReference Include="..\EbisuWebApi.Infrastructure.Persistence\EbisuWebApi.Infrastructure.Persistence.csproj" />
   </ItemGroup>
 
 </Project>

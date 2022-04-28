@@ -3,6 +3,7 @@ using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 using VuelingCF.Infrastructure.Repositories.Configurations;
@@ -17,7 +18,7 @@ namespace EbisuWebApi.Infrastructure.Persistence.DataBaseContext
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
-            builder.ApplyConfiguration(new UserModelConfiguration());
+            builder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly());
 
         }
     }

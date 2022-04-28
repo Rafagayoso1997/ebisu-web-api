@@ -1,25 +1,23 @@
-﻿using EbisuWebApi.Domain.RepositoryContracts.Contracts;
+﻿using EbisuWebApi.Crosscutting.ResourcesManagement;
+using EbisuWebApi.Domain.RepositoryContracts.Contracts;
 using EbisuWebApi.Infrastructure.Persistence.DataBaseContext;
 using EbisuWebApi.Infrastructure.Repositories.Implementations;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace EbisuWebApi.Application.Services.Configuration
 {
     public static class IoC
     {
+        private static readonly string connectionString = DatabaseConnection.ConnectionString;
         public static IServiceCollection ConfigureServicesLayer(this IServiceCollection services)
         {
-            
-            var connectionString = "";
+
+            services.AddTransient<IUserRepository, UserRepository>();
+            services.AddTransient<IUnitOfWork, UnitOfWork>();
             services.AddDbContext<DataBaseContext>(options =>
                 options.UseMySql(connectionString, ServerVersion.AutoDetect(connectionString)));
+
             services.AddTransient<IUserRepository, UserRepository>();
             return services;
         }
