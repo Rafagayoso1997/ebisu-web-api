@@ -11,9 +11,9 @@ namespace EbisuWebApi.Infrastructure.Repositories.Implementations
 {
     public abstract class GenericRepository<T> : IGenericRepository<T> where T : class
     {
-        protected readonly DataBaseContext _context;
+        protected readonly DatabaseContext _context;
 
-        protected GenericRepository(DataBaseContext context)
+        protected GenericRepository(DatabaseContext context)
         {
             _context = context;
         }

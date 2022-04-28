@@ -10,9 +10,9 @@ using VuelingCF.Infrastructure.Repositories.Configurations;
 
 namespace EbisuWebApi.Infrastructure.Persistence.DataBaseContext
 {
-    public class DataBaseContext  : DbContext
+    public class DatabaseContext : DbContext
     {
-        public DataBaseContext(DbContextOptions<DataBaseContext> options) : base(options) { }
+        public DatabaseContext(DbContextOptions<DatabaseContext> options) : base(options) { }
 
         public DbSet<User> Users { get; set; }
 

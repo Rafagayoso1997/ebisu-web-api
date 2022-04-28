@@ -12,7 +12,7 @@ namespace EbisuWebApi.Infrastructure.Repositories.Implementations
 {
     public class UserRepository : GenericRepository<UserEntity>, IUserRepository
     {
-        public UserRepository(DataBaseContext context) : base(context)
+        public UserRepository(DatabaseContext context) : base(context)
         {
         }
 
