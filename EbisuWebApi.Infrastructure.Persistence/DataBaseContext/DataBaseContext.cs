@@ -1,4 +1,5 @@
-﻿using EbisuWebApi.Infrastructure.DataModel;
+﻿using EbisuWebApi.Domain.Entities;
+using EbisuWebApi.Infrastructure.DataModel;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -14,7 +15,7 @@ namespace EbisuWebApi.Infrastructure.Persistence.DataBaseContext
     {
         public DatabaseContext(DbContextOptions<DatabaseContext> options) : base(options) { }
 
-        public DbSet<User> Users { get; set; }
+        public DbSet<UserEntity> Users { get; set; }
 
         protected override void OnModelCreating(ModelBuilder builder)
         {

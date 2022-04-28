@@ -16,31 +16,28 @@ namespace EbisuWebApi.Web.Api.Controllers
             _userService = userService;
         }
 
-        [HttpGet]
-        public async Task<IActionResult> GetAllAsync()
+
+        [HttpPost]
+        public async Task<IActionResult> SaveAsync(UserDTO userDto)
         {
             try
             {
-                return Ok(await _userService.GetAllUsersAsync());
+                return Ok(await _userService.AddUserAsync(userDto));
             }
             catch (Exception ex)
             {
 
                 return BadRequest(ex.Message);
             }
+
         }
 
-        [HttpPost]
-        public async Task<IActionResult> SaveAsync(string name, string pw, string email )
+        [HttpGet]
+        public async Task<IActionResult> GetAllAsync()
         {
-            UserDTO userDTO = new();
-            userDTO.UserName = name;
-            userDTO.Password = pw;
-            userDTO.Email = email;
-
             try
             {
-                return Ok(await _userService.AddUserAsync(userDTO));
+                return Ok(await _userService.GetAll());
             }
             catch (Exception ex)
             {
