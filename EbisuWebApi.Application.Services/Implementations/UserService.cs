@@ -19,16 +19,10 @@ namespace EbisuWebApi.Application.Services.Implementations
             _userRepository = userRepository;
         }
 
-        public async Task<IEnumerable<UserDTO>> GetAllUsersAsync()
-        {
-            throw new NotImplementedException();
-        } //=>
-            //_userRepository.GetAllUsersAsync();
+        public async Task<IEnumerable<UserDTO>> GetAllUsersAsync() =>
+            await _userRepository.GetAll().Select(x => UserMapper.MappUserEntityIntoUserDTO(x));
 
-        public async Task<IEnumerable<UserDTO>> AddUserAsync(UserDTO userDTO)
-        {
-            throw new NotImplementedException();
-        } //=>
-            //_userRepository.AddUserAsync();
+        public async Task<IEnumerable<UserDTO>> AddUserAsync(UserDTO userDTO) =>
+            _userRepository.Add(UserMapper.MappUserDTOIntoUserEntity(userDTO));
     }
 }
