@@ -1,4 +1,5 @@
-﻿using EbisuWebApi.Infrastructure.DataModel;
+﻿using EbisuWebApi.Domain.Entities;
+using EbisuWebApi.Infrastructure.DataModel;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using System;
@@ -10,9 +11,9 @@ using System.Threading.Tasks;
 
 namespace VuelingCF.Infrastructure.Repositories.Configurations
 {
-    public class UserModelConfiguration : IEntityTypeConfiguration<User>
+    public class UserModelConfiguration : IEntityTypeConfiguration<UserEntity>
     {
-        public void Configure(EntityTypeBuilder<User> builder)
+        public void Configure(EntityTypeBuilder<UserEntity> builder)
         {
             builder.ToTable("User");
             builder.HasKey(user => user.UserId);

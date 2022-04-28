@@ -22,7 +22,7 @@ namespace EbisuWebApi.Application.Services.Configuration
                 var serverVersion = new MySqlServerVersion(new Version(8, 0, 28));
                 options.UseMySql(configuration.GetConnectionString("DefaultConnection"), serverVersion);
             });
-            
+
 
             services.AddTransient<IUserRepository, UserRepository>();
             return services;

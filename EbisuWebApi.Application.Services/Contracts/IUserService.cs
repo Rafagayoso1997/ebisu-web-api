@@ -9,8 +9,8 @@ namespace EbisuWebApi.Application.Services.Contracts
 {
     public interface IUserService
     {
-        Task<IEnumerable<UserDTO>> GetAllUsersAsync();
+        Task<UserDTO> AddUserAsync(UserDTO userDTO);
 
-        Task<IEnumerable<UserDTO>> AddUserAsync(UserDTO userDTO);
+        Task<IEnumerable<UserDTO>> GetAll();
     }
 }

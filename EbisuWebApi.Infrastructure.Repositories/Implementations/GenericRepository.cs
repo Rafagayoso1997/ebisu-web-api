@@ -20,27 +20,31 @@ namespace EbisuWebApi.Infrastructure.Repositories.Implementations
 
         public async Task<T> Add(T entity)
         {
-            throw new NotImplementedException();
+            var result = await _context.Set<T>().AddAsync(entity);
+            return result.Entity;
         }
 
         public async Task<T> Delete(int id)
         {
-            throw new NotImplementedException();
+            var entityT = await GetEntity(id);
+            var result = _context.Set<T>().Remove(entityT);
+            return result.Entity;
         }
 
         public async Task<IEnumerable<T>> GetAll()
         {
-            throw new NotImplementedException();
+            return await _context.Set<T>().ToListAsync();
         }
 
         public async Task<T> GetEntity(int id)
         {
-            throw new NotImplementedException();
+            return await _context.Set<T>().FindAsync(id);
         }
 
         public async Task<T> Update(T entity)
         {
-            throw new NotImplementedException();
+            var result = _context.Set<T>().Update(entity);
+            return result.Entity;
         }
     }
 }

@@ -11,7 +11,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace EbisuWebApi.Infrastructure.Persistence.Migrations
 {
     [DbContext(typeof(DatabaseContext))]
-    [Migration("20220428180523_UserMigration")]
+    [Migration("20220428221137_UserMigration")]
     partial class UserMigration
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -21,7 +21,7 @@ namespace EbisuWebApi.Infrastructure.Persistence.Migrations
                 .HasAnnotation("ProductVersion", "6.0.4")
                 .HasAnnotation("Relational:MaxIdentifierLength", 64);
 
-            modelBuilder.Entity("EbisuWebApi.Infrastructure.DataModel.User", b =>
+            modelBuilder.Entity("EbisuWebApi.Domain.Entities.UserEntity", b =>
                 {
                     b.Property<int>("UserId")
                         .ValueGeneratedOnAdd()
