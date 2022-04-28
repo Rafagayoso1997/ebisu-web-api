@@ -12,5 +12,11 @@ namespace EbisuWebApi.Application.Services.Contracts
         Task<UserDTO> AddUserAsync(UserDTO userDTO);
 
         Task<IEnumerable<UserDTO>> GetAll();
+
+        Task<UserDTO> GetById(int id);
+
+        Task<UserDTO> UpdateUser(UserDTO userDTO);
+
+        Task<UserDTO> RemoveUser(int id);
     }
 }

@@ -18,7 +18,7 @@ namespace EbisuWebApi.Web.Api.Controllers
 
 
         [HttpPost]
-        public async Task<IActionResult> SaveAsync(UserDTO userDto)
+        public async Task<IActionResult> SaveUserAsync(UserDTO userDto)
         {
             try
             {
@@ -33,7 +33,7 @@ namespace EbisuWebApi.Web.Api.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> GetAllAsync()
+        public async Task<IActionResult> GetAllUsersAsync()
         {
             try
             {
@@ -45,6 +45,49 @@ namespace EbisuWebApi.Web.Api.Controllers
                 return BadRequest(ex.Message);
             }
 
+        }
+
+        [HttpGet("{id}")]
+        public async Task<IActionResult> GetUserById(int id)
+        {
+            try
+            {
+                return Ok(await _userService.GetById(id));
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+
+        }
+
+        // PUT api/<InvoiceController>/5
+        [HttpPut]
+        public async Task<IActionResult> PutAsync(UserDTO userDTO)
+        {
+            try
+            {
+                
+                return Ok(await _userService.UpdateUser(userDTO));
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
+
+        // DELETE api/<InvoiceController>/5
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> DeleteAsync(int id)
+        {
+            try
+            {
+                return Ok(await _userService.RemoveUser(id));
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
         }
 
     }

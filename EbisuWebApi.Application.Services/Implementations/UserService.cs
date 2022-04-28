@@ -37,5 +37,27 @@ namespace EbisuWebApi.Application.Services.Implementations
 
             return _mapper.Map<IEnumerable<UserDTO>>(await _unitOfWork.Users.GetAll()); ;
         }
+
+        public async Task<UserDTO> GetById(int id)
+        {
+            UserEntity entity = await _unitOfWork.Users.GetEntity(id);
+            //_unitOfWork.Complete();
+            return _mapper.Map<UserDTO>(entity);
+        }
+
+        public async Task<UserDTO> RemoveUser(int id)
+        {
+            
+            UserEntity entity = await _unitOfWork.Users.Delete(id);
+            _unitOfWork.Complete();
+            return _mapper.Map<UserDTO>(entity);
+        }
+
+        public async Task<UserDTO> UpdateUser(UserDTO userDTO)
+        {
+            UserEntity entity = await _unitOfWork.Users.Update(_mapper.Map<UserEntity>(userDTO));
+            _unitOfWork.Complete();
+            return _mapper.Map<UserDTO>(entity);
+        }
     }
 }
