@@ -7,6 +7,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\EbisuWebApi.Domain.Entities\EbisuWebApi.Domain.Entities.csproj" />
     <ProjectReference Include="..\EbisuWebApi.Infrastructure.DataModel\EbisuWebApi.Infrastructure.DataModel.csproj" />
   </ItemGroup>
 
