@@ -7,11 +7,11 @@ namespace EbisuWebApi.Infrastructure.Repositories.Implementations
 {
     public class UnitOfWork : IUnitOfWork
     {
-        private readonly DataBaseContext _context;
+        private readonly DatabaseContext _context;
         public IUserRepository Users { get; }
         
 
-        public UnitOfWork(DataBaseContext context,
+        public UnitOfWork(DatabaseContext context,
             IUserRepository userRepository)
         {
             _context = context;

@@ -2,7 +2,7 @@
 {
     public class DatabaseConnection
     {
-        public static readonly string ConnectionString =
+        public static readonly string ConnectionString = 
            $"Server={Environment.GetEnvironmentVariable("HOST")};" +
                             $"Database={Environment.GetEnvironmentVariable("DATABASE")};" +
                             $"Uid={Environment.GetEnvironmentVariable("USER_NAME")};" +
