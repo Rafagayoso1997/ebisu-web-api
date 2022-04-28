@@ -5,20 +5,15 @@ namespace EbisuWebApi.Crosscutting.Security
 {
     public static class Encoding
     {
-        static string EncryptStringToBytes_Aes(string stringToEncrypt, byte[] Key, byte[] IV)
+        public static string EncryptStringToBytes_Aes(string stringToEncrypt)
         {
-            if (stringToEncrypt == null || stringToEncrypt.Length <= 0)
-                throw new ArgumentNullException();
-            if (Key == null || Key.Length <= 0)
-                throw new ArgumentNullException();
-            if (IV == null || IV.Length <= 0)
-                throw new ArgumentNullException();
-
             byte[] encrypted;
 
             using (Aes aesAlgorithm = Aes.Create())
             {
-                aesAlgorithm.Key = Key;
+                byte[] IV = { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16 };
+                byte[] key = { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16 };
+                aesAlgorithm.Key = key;
                 aesAlgorithm.IV = IV;
 
                 //TODO:

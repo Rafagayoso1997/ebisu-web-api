@@ -33,7 +33,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EbisuWebApi.Crosscutting.Se
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EbisuWebApi.Crosscutting.ResourcesManagement", "EbisuWebApi.Crosscutting.ResourcesManagement\EbisuWebApi.Crosscutting.ResourcesManagement.csproj", "{B127CF3B-8427-49EC-B3E6-00D8A75AF92A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EbisuWebApi.Application.DTOs", "EbisuWebApi.Application.DTOs\EbisuWebApi.Application.DTOs.csproj", "{F1A60B2D-0F92-49BE-8085-3FB10D17DD21}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EbisuWebApi.Application.DTOs", "EbisuWebApi.Application.DTOs\EbisuWebApi.Application.DTOs.csproj", "{F1A60B2D-0F92-49BE-8085-3FB10D17DD21}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

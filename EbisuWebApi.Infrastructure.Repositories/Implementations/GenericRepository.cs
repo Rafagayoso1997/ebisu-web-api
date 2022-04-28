@@ -18,7 +18,7 @@ namespace EbisuWebApi.Infrastructure.Repositories.Implementations
             _context = context;
         }
 
-        public Task<T> Add(T entity)
+        public async Task<T> Add(T entity)
         {
             throw new NotImplementedException();
         }
@@ -38,7 +38,7 @@ namespace EbisuWebApi.Infrastructure.Repositories.Implementations
             throw new NotImplementedException();
         }
 
-        public Task<T> Update(T entity)
+        public async Task<T> Update(T entity)
         {
             throw new NotImplementedException();
         }
