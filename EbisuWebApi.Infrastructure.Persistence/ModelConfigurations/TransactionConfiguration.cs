@@ -1,4 +1,5 @@
 ﻿using EbisuWebApi.Domain.Entities;
+using EbisuWebApi.Infrastructure.DataModel;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using System;
@@ -9,9 +10,9 @@ using System.Threading.Tasks;
 
 namespace EbisuWebApi.Infrastructure.Persistence.ModelConfigurations
 {
-    public class TransactionConfiguration : IEntityTypeConfiguration<TransactionEntity>
+    public class TransactionConfiguration : IEntityTypeConfiguration<TransactionDataModel>
     {
-        public void Configure(EntityTypeBuilder<TransactionEntity> builder)
+        public void Configure(EntityTypeBuilder<TransactionDataModel> builder)
         {
             builder.ToTable("Transaction");
             builder.HasKey(transaction => transaction.TransactionId);

@@ -20,7 +20,7 @@ namespace EbisuWebApi.Infrastructure.Persistence.Migrations
                 .HasAnnotation("ProductVersion", "6.0.4")
                 .HasAnnotation("Relational:MaxIdentifierLength", 64);
 
-            modelBuilder.Entity("CategoryEntityUserEntity", b =>
+            modelBuilder.Entity("CategoryDataModelUserDataModel", b =>
                 {
                     b.Property<int>("CategoriesCategoryId")
                         .HasColumnType("int");
@@ -32,10 +32,10 @@ namespace EbisuWebApi.Infrastructure.Persistence.Migrations
 
                     b.HasIndex("UsersUserId");
 
-                    b.ToTable("CategoryEntityUserEntity");
+                    b.ToTable("CategoryDataModelUserDataModel");
                 });
 
-            modelBuilder.Entity("EbisuWebApi.Domain.Entities.CategoryEntity", b =>
+            modelBuilder.Entity("EbisuWebApi.Infrastructure.DataModel.CategoryDataModel", b =>
                 {
                     b.Property<int>("CategoryId")
                         .ValueGeneratedOnAdd()
@@ -69,7 +69,7 @@ namespace EbisuWebApi.Infrastructure.Persistence.Migrations
                     b.ToTable("Category", (string)null);
                 });
 
-            modelBuilder.Entity("EbisuWebApi.Domain.Entities.TransactionEntity", b =>
+            modelBuilder.Entity("EbisuWebApi.Infrastructure.DataModel.TransactionDataModel", b =>
                 {
                     b.Property<int>("TransactionId")
                         .ValueGeneratedOnAdd()
@@ -102,7 +102,7 @@ namespace EbisuWebApi.Infrastructure.Persistence.Migrations
                     b.ToTable("Transaction", (string)null);
                 });
 
-            modelBuilder.Entity("EbisuWebApi.Domain.Entities.UserEntity", b =>
+            modelBuilder.Entity("EbisuWebApi.Infrastructure.DataModel.UserDataModel", b =>
                 {
                     b.Property<int>("UserId")
                         .ValueGeneratedOnAdd()
@@ -129,30 +129,30 @@ namespace EbisuWebApi.Infrastructure.Persistence.Migrations
                     b.ToTable("User", (string)null);
                 });
 
-            modelBuilder.Entity("CategoryEntityUserEntity", b =>
+            modelBuilder.Entity("CategoryDataModelUserDataModel", b =>
                 {
-                    b.HasOne("EbisuWebApi.Domain.Entities.CategoryEntity", null)
+                    b.HasOne("EbisuWebApi.Infrastructure.DataModel.CategoryDataModel", null)
                         .WithMany()
                         .HasForeignKey("CategoriesCategoryId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("EbisuWebApi.Domain.Entities.UserEntity", null)
+                    b.HasOne("EbisuWebApi.Infrastructure.DataModel.UserDataModel", null)
                         .WithMany()
                         .HasForeignKey("UsersUserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("EbisuWebApi.Domain.Entities.TransactionEntity", b =>
+            modelBuilder.Entity("EbisuWebApi.Infrastructure.DataModel.TransactionDataModel", b =>
                 {
-                    b.HasOne("EbisuWebApi.Domain.Entities.CategoryEntity", "Category")
+                    b.HasOne("EbisuWebApi.Infrastructure.DataModel.CategoryDataModel", "Category")
                         .WithMany()
                         .HasForeignKey("CategoryId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("EbisuWebApi.Domain.Entities.UserEntity", "User")
+                    b.HasOne("EbisuWebApi.Infrastructure.DataModel.UserDataModel", "User")
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)

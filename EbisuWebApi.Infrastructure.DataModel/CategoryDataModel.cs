@@ -5,9 +5,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace EbisuWebApi.Domain.Entities
+namespace EbisuWebApi.Infrastructure.DataModel
 {
-    public class CategoryEntity
+    public class CategoryDataModel
     {
         public int CategoryId { get; set; }
         public CategoryType Type { get; set; }
@@ -15,5 +15,7 @@ namespace EbisuWebApi.Domain.Entities
         public string Description { get; set; }
         public string ImageUrl { get; set; }
         public bool IsDefault { get; set; }
+
+        public ICollection<UserDataModel> Users { get; set; }
     }
 }

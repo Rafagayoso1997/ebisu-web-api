@@ -3,6 +3,7 @@ using EbisuWebApi.Application.DTOs;
 using EbisuWebApi.Application.Services.Contracts;
 using EbisuWebApi.Domain.Entities;
 using EbisuWebApi.Domain.RepositoryContracts.Contracts;
+using EbisuWebApi.Infrastructure.DataModel;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -24,35 +25,43 @@ namespace EbisuWebApi.Application.Services.Implementations
 
         public async Task<CategoryDto> AddCategoryAsync(CategoryDto categoryDto)
         {
-            CategoryEntity entity = await _unitOfWork.Categories.Add(_mapper.Map<CategoryEntity>(categoryDto));
+            CategoryDataModel entityDataModel = _mapper.Map<CategoryDataModel>(_mapper.Map<CategoryEntity>(categoryDto));
+
+            var result = await _unitOfWork.Categories.Add(entityDataModel);
             _unitOfWork.Complete();
-            return _mapper.Map<CategoryDto>(entity);
+
+            return _mapper.Map<CategoryDto>(_mapper.Map<CategoryEntity>(result));
+
         }
 
         public async Task<IEnumerable<CategoryDto>> GetAll()
         {
-            return _mapper.Map<IEnumerable<CategoryDto>>(await _unitOfWork.Categories.GetAll()); ;
+            return _mapper.Map<IEnumerable<CategoryDto>>(_mapper.Map<IEnumerable<CategoryEntity>>(await _unitOfWork.Categories.GetAll()));
         }
 
         public async Task<CategoryDto> GetById(int id)
         {
-            CategoryEntity entity = await _unitOfWork.Categories.GetEntity(id);
-            //_unitOfWork.Complete();
-            return _mapper.Map<CategoryDto>(entity);
+            return _mapper.Map<CategoryDto>(_mapper.Map<CategoryEntity>(await _unitOfWork.Categories.GetEntity(id)));   
         }
 
         public async Task<CategoryDto> RemoveCategory(int id)
         {
-            CategoryEntity entity = await _unitOfWork.Categories.Delete(id);
+            var categoryDto = _mapper.Map<CategoryDto>(_mapper.Map<CategoryEntity>(await _unitOfWork.Categories.Delete(id)));
+
             _unitOfWork.Complete();
-            return _mapper.Map<CategoryDto>(entity);
+            return categoryDto;
         }
 
         public async Task<CategoryDto> UpdateCategory(CategoryDto categoryDto)
         {
-            CategoryEntity entity = await _unitOfWork.Categories.Update(_mapper.Map<CategoryEntity>(categoryDto));
+            CategoryDataModel entityDataModel = _mapper.Map<CategoryDataModel>(_mapper.Map<CategoryEntity>(categoryDto));
+
+            var result = await _unitOfWork.Categories.Update(entityDataModel);
             _unitOfWork.Complete();
-            return _mapper.Map<CategoryDto>(entity);
+
+            return _mapper.Map<CategoryDto>(_mapper.Map<CategoryEntity>(result));
+
+            
         }
     }
 }

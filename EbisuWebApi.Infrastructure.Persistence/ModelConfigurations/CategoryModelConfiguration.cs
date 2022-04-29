@@ -1,5 +1,6 @@
 ﻿using EbisuWebApi.Crosscutting.Utils;
 using EbisuWebApi.Domain.Entities;
+using EbisuWebApi.Infrastructure.DataModel;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using System;
@@ -10,9 +11,9 @@ using System.Threading.Tasks;
 
 namespace EbisuWebApi.Infrastructure.Persistence.ModelConfigurations
 {
-    public class CategoryModelConfiguration : IEntityTypeConfiguration<CategoryEntity>
+    public class CategoryModelConfiguration : IEntityTypeConfiguration<CategoryDataModel>
     {
-        public void Configure(EntityTypeBuilder<CategoryEntity> builder)
+        public void Configure(EntityTypeBuilder<CategoryDataModel> builder)
         {
             builder.ToTable("Category");
             builder.HasKey(category => category.CategoryId);

@@ -15,10 +15,10 @@ namespace EbisuWebApi.Infrastructure.Persistence.DataBaseContext
     {
         public DatabaseContext(DbContextOptions<DatabaseContext> options) : base(options) { }
 
-        public DbSet<UserEntity> Users { get; set; }
-        public DbSet<CategoryEntity> Categories { get; set; }
+        public DbSet<UserDataModel> Users { get; set; }
+        public DbSet<CategoryDataModel> Categories { get; set; }
 
-        public DbSet<TransactionEntity> Transactions { get; set; }
+        public DbSet<TransactionDataModel> Transactions { get; set; }
 
         protected override void OnModelCreating(ModelBuilder builder)
         {

@@ -11,9 +11,9 @@ using System.Threading.Tasks;
 
 namespace VuelingCF.Infrastructure.Repositories.Configurations
 {
-    public class UserModelConfiguration : IEntityTypeConfiguration<UserEntity>
+    public class UserModelConfiguration : IEntityTypeConfiguration<UserDataModel>
     {
-        public void Configure(EntityTypeBuilder<UserEntity> builder)
+        public void Configure(EntityTypeBuilder<UserDataModel> builder)
         {
             builder.ToTable("User");
             builder.HasKey(user => user.UserId);
