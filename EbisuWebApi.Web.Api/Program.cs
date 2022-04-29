@@ -1,17 +1,14 @@
 using EbisuWebApi.Application.Services.Configuration;
 using EbisuWebApi.Application.Services.Contracts;
 using EbisuWebApi.Application.Services.Implementations;
+using EbisuWebApi.Web.Api.Configuration;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 
 builder.Services.AddControllers();
-
-builder.Services.AddTransient<IUserService, UserService>();
-builder.Services.AddTransient<ICategoryService, CategoryService>();
-builder.Services.AddTransient<ITransactionService, TransactionService>();
-builder.Services.ConfigureServicesLayer(builder.Configuration);
+builder.Services.ConfigureWebAPILayer(builder.Configuration, builder);
 
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
