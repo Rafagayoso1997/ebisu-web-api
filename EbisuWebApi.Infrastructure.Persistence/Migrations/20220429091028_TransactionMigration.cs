@@ -55,7 +55,7 @@ namespace EbisuWebApi.Infrastructure.Persistence.Migrations
                 .Annotation("MySql:CharSet", "utf8mb4");
 
             migrationBuilder.CreateTable(
-                name: "CategoryEntityUserEntity",
+                name: "CategoryDataModelUserDataModel",
                 columns: table => new
                 {
                     CategoriesCategoryId = table.Column<int>(type: "int", nullable: false),
@@ -63,15 +63,15 @@ namespace EbisuWebApi.Infrastructure.Persistence.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_CategoryEntityUserEntity", x => new { x.CategoriesCategoryId, x.UsersUserId });
+                    table.PrimaryKey("PK_CategoryDataModelUserDataModel", x => new { x.CategoriesCategoryId, x.UsersUserId });
                     table.ForeignKey(
-                        name: "FK_CategoryEntityUserEntity_Category_CategoriesCategoryId",
+                        name: "FK_CategoryDataModelUserDataModel_Category_CategoriesCategoryId",
                         column: x => x.CategoriesCategoryId,
                         principalTable: "Category",
                         principalColumn: "CategoryId",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_CategoryEntityUserEntity_User_UsersUserId",
+                        name: "FK_CategoryDataModelUserDataModel_User_UsersUserId",
                         column: x => x.UsersUserId,
                         principalTable: "User",
                         principalColumn: "UserId",
@@ -111,8 +111,8 @@ namespace EbisuWebApi.Infrastructure.Persistence.Migrations
                 .Annotation("MySql:CharSet", "utf8mb4");
 
             migrationBuilder.CreateIndex(
-                name: "IX_CategoryEntityUserEntity_UsersUserId",
-                table: "CategoryEntityUserEntity",
+                name: "IX_CategoryDataModelUserDataModel_UsersUserId",
+                table: "CategoryDataModelUserDataModel",
                 column: "UsersUserId");
 
             migrationBuilder.CreateIndex(
@@ -129,7 +129,7 @@ namespace EbisuWebApi.Infrastructure.Persistence.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "CategoryEntityUserEntity");
+                name: "CategoryDataModelUserDataModel");
 
             migrationBuilder.DropTable(
                 name: "Transaction");

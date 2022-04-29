@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace EbisuWebApi.Domain.RepositoryContracts.Contracts
 {
-    public interface IUserRepository : IGenericRepository<UserEntity>
+    public interface IUserRepository : IGenericRepository<UserDataModel>
     {
     }
 }

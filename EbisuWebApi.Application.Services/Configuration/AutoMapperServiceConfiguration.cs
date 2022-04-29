@@ -2,6 +2,7 @@
 using EbisuWebApi.Application.DTOs;
 using EbisuWebApi.Crosscutting.Utils;
 using EbisuWebApi.Domain.Entities;
+using EbisuWebApi.Infrastructure.DataModel;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -23,6 +24,9 @@ namespace EbisuWebApi.Application.Services.Configuration
 
             CreateMap<UserEntity, UserDTO>();
             CreateMap<CategoryEntity, CategoryDto>();
+
+            CreateMap<UserEntity, UserDataModel>().ReverseMap();
+            CreateMap<CategoryEntity, CategoryDataModel>().ReverseMap();
 
         }
     }

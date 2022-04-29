@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace EbisuWebApi.Infrastructure.Repositories.Implementations
 {
-    public class UserRepository : GenericRepository<UserEntity>, IUserRepository
+    public class UserRepository : GenericRepository<UserDataModel>, IUserRepository
     {
         public UserRepository(DatabaseContext context) : base(context)
         {
