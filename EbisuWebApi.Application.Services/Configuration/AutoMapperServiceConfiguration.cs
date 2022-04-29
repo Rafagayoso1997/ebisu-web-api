@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using EbisuWebApi.Application.DTOs;
+using EbisuWebApi.Crosscutting.Utils;
 using EbisuWebApi.Domain.Entities;
 using System;
 using System.Collections.Generic;
@@ -16,9 +17,13 @@ namespace EbisuWebApi.Application.Services.Configuration
         {
             CreateMap<UserDTO, UserEntity>()
                 .ForMember(dest => dest.Password, opt => opt.MapFrom(src => Encoding.EncryptStringToBytes_Aes(src.Password)));
-            
+
+            CreateMap<CategoryDto, CategoryEntity>()
+                .ForMember(dest => dest.Type, opt => opt.MapFrom(src => Enum.Parse(typeof(CategoryType), src.Type)));
+
             CreateMap<UserEntity, UserDTO>();
-           
+            CreateMap<CategoryEntity, CategoryDto>();
+
         }
     }
 }
