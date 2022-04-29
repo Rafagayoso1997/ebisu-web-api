@@ -28,6 +28,9 @@ namespace EbisuWebApi.Application.Services.Configuration
             CreateMap<UserEntity, UserDataModel>().ReverseMap();
             CreateMap<CategoryEntity, CategoryDataModel>().ReverseMap();
 
+            CreateMap<TransactionEntity, TransactionDataModel>().ReverseMap();
+            CreateMap<TransactionEntity, TransactionDTO>().ReverseMap();
+
         }
     }
 }
