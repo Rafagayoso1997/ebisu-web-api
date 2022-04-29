@@ -12,5 +12,7 @@ namespace EbisuWebApi.Application.DTOs
         public string Description { get; set; }
         public double Amount { get; set; }
         public DateTime TransactionDate { get; set; }
+        public int UserId { get; set; }
+        public int CategoryId { get; set; }
     }
 }
