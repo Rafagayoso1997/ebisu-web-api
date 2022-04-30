@@ -10,5 +10,6 @@ namespace EbisuWebApi.Domain.RepositoryContracts.Contracts
 {
     public interface ITransactionRepository : IGenericRepository<TransactionDataModel>
     {
+        Task<IEnumerable<TransactionDataModel>> GetTransactionsByUserId(int userId);
     }
 }

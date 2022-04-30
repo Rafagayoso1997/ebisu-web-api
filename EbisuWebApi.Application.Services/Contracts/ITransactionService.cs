@@ -13,6 +13,8 @@ namespace EbisuWebApi.Application.Services.Contracts
 
         Task<IEnumerable<TransactionDto>> GetAllTransactions();
 
+        Task<IEnumerable<TransactionDto>> GetAllTransactionsByUserId(int userId);
+
         Task<TransactionDto> GeTransactionById(int id);
 
         Task<TransactionDto> UpdateTransaction(TransactionDto transactionDTO);
