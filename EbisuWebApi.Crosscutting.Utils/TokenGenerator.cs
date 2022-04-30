@@ -30,11 +30,11 @@ namespace EbisuWebApi.Crosscutting.Utils
                 SigningCredentials = signingCredentials
             };
 
-            var tokenHanlder = new JwtSecurityTokenHandler();
+            var tokenHandler = new JwtSecurityTokenHandler();
 
-            var token = tokenHanlder.CreateToken(tokenDescriptor);
+            var token = tokenHandler.CreateToken(tokenDescriptor);
 
-            return tokenHanlder.WriteToken(token);
+            return tokenHandler.WriteToken(token);
         }
     }
 }

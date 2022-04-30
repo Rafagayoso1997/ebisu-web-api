@@ -27,8 +27,9 @@ namespace EbisuWebApi.Application.Services.Configuration
 
             CreateMap<UserEntity, UserDto>();
             CreateMap<UserEntity, UserLoginDto>();
+
             CreateMap<UserEntity, UserLoginTokenDto>()
-                .ForMember(dest => dest.Token, opt => opt.MapFrom(src => TokenGenerator.CreateToken(src.UserId,src.UserName))); ;
+                .ForMember(dest => dest.Token, opt => opt.MapFrom(src => TokenGenerator.CreateToken(src.UserId,src.UserName)));
 
             CreateMap<CategoryEntity, CategoryDto>();
 

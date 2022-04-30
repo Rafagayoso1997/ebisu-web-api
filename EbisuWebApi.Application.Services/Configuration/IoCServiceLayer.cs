@@ -25,8 +25,6 @@ namespace EbisuWebApi.Application.Services.Configuration
                 options.UseMySql(configuration.GetConnectionString("DefaultConnection"), serverVersion);
             });
 
-
-            services.AddTransient<IUserRepository, UserRepository>();
             return services;
         }
     }
