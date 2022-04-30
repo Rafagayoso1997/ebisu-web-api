@@ -19,10 +19,17 @@ namespace EbisuWebApi.Application.Services.Configuration
             CreateMap<UserDto, UserEntity>()
                 .ForMember(dest => dest.Password, opt => opt.MapFrom(src => Encoding.EncryptStringToBytes_Aes(src.Password)));
 
+            CreateMap<UserLoginDto, UserEntity>()
+                .ForMember(dest => dest.Password, opt => opt.MapFrom(src => Encoding.EncryptStringToBytes_Aes(src.Password)));
+
             CreateMap<CategoryDto, CategoryEntity>()
                 .ForMember(dest => dest.Type, opt => opt.MapFrom(src => Enum.Parse(typeof(CategoryType), src.Type)));
 
             CreateMap<UserEntity, UserDto>();
+            CreateMap<UserEntity, UserLoginDto>();
+            CreateMap<UserEntity, UserLoginTokenDto>()
+                .ForMember(dest => dest.Token, opt => opt.MapFrom(src => TokenGenerator.CreateToken(src.UserId,src.UserName))); ;
+
             CreateMap<CategoryEntity, CategoryDto>();
 
             CreateMap<UserEntity, UserDataModel>().ReverseMap();

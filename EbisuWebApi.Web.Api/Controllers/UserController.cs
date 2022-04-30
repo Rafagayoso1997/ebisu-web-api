@@ -1,10 +1,12 @@
 ﻿using EbisuWebApi.Application.Dtos;
 using EbisuWebApi.Application.Services.Contracts;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace EbisuWebApi.Web.Api.Controllers
 {
+    [Authorize]
     [Route("api/[controller]")]
     [ApiController]
     public class UserController : ControllerBase
@@ -16,9 +18,9 @@ namespace EbisuWebApi.Web.Api.Controllers
             _userService = userService;
         }
 
-
+        [AllowAnonymous]
         [HttpPost]
-        public async Task<IActionResult> SaveUserAsync(UserDto userDto)
+        public async Task<IActionResult> RegisterUserAsync(UserDto userDto)
         {
             try
             {
@@ -59,6 +61,21 @@ namespace EbisuWebApi.Web.Api.Controllers
                 return BadRequest(ex.Message);
             }
 
+        }
+        
+        [AllowAnonymous]
+        [HttpPost("Login")]
+        public async Task<IActionResult> LoginUser(UserLoginDto userDTO)
+        {
+            try
+            {
+
+                return Ok(await _userService.LoginUser(userDTO));
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
         }
 
         // PUT api/<InvoiceController>/5

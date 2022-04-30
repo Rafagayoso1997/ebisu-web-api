@@ -8,7 +8,7 @@ using Microsoft.Extensions.DependencyInjection;
 
 namespace EbisuWebApi.Application.Services.Configuration
 {
-    public static class IoC
+    public static class IoCServiceLayer
     {
         private static readonly string connectionString = DatabaseConnection.ConnectionString;
         public static IServiceCollection ConfigureServicesLayer(this IServiceCollection services, IConfiguration configuration)

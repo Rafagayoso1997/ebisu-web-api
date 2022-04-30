@@ -1,10 +1,13 @@
 ﻿using EbisuWebApi.Application.Dtos;
 using EbisuWebApi.Application.Services.Contracts;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using System.Security.Claims;
 
 namespace EbisuWebApi.Web.Api.Controllers
 {
+    [Authorize]
     [Route("api/[controller]")]
     [ApiController]
     public class TransactionController : ControllerBase
@@ -61,11 +64,12 @@ namespace EbisuWebApi.Web.Api.Controllers
 
         }
 
-        [HttpGet("GetByUser/{userId}")]
-        public async Task<IActionResult> GetTransactionByUserId(int userId)
+        [HttpGet("GetByUser")]
+        public async Task<IActionResult> GetTransactionByUserId()
         {
             try
             {
+                int userId = int.Parse(User.Claims.FirstOrDefault(claim => claim.Type == ClaimTypes.NameIdentifier).Value);
                 return Ok(await _transactionService.GetAllTransactionsByUserId(userId));
             }
             catch (Exception ex)

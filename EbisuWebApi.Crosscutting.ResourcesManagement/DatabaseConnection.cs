@@ -6,7 +6,7 @@
            $"Server={Environment.GetEnvironmentVariable("HOST")};" +
                             $"Database={Environment.GetEnvironmentVariable("DATABASE")};" +
                             $"Uid={Environment.GetEnvironmentVariable("USER_NAME")};" +
-                            $"Pwd={Environment.GetEnvironmentVariable("PASSWORD")};";
+                            $"Pwd={Environment.GetEnvironmentVariable("PASSWORD_DB")};";
 
     }
 }
