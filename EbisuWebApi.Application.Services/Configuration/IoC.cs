@@ -21,7 +21,7 @@ namespace EbisuWebApi.Application.Services.Configuration
 
             services.AddDbContext<DatabaseContext>(options =>
             {
-                var serverVersion = new MySqlServerVersion(new Version(8, 0, 28));
+                var serverVersion = new MySqlServerVersion(new Version(5, 6, 50));
                 options.UseMySql(configuration.GetConnectionString("DefaultConnection"), serverVersion);
             });
 
