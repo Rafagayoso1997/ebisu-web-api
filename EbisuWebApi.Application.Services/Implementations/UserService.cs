@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using EbisuWebApi.Application.Dtos;
 using EbisuWebApi.Application.Services.Contracts;
+using EbisuWebApi.Crosscutting.Exceptions;
 using EbisuWebApi.Domain.Entities;
 using EbisuWebApi.Domain.RepositoryContracts.Contracts;
 using EbisuWebApi.Infrastructure.DataModel;
@@ -27,8 +28,12 @@ namespace EbisuWebApi.Application.Services.Implementations
 
         public async Task<UserDto> AddUserAsync(UserDto userDTO)
         {
+     
             UserDataModel entityDataModel = _mapper.Map<UserDataModel>(_mapper.Map<UserEntity>(userDTO));
-            
+
+            bool userExist = await _unitOfWork.Users.UserExist(entityDataModel.UserName);
+            if (userExist) throw new UserNameAlreadyExistException();
+
             var result = await _unitOfWork.Users.Add(entityDataModel);
             _unitOfWork.Complete();
             
@@ -46,6 +51,15 @@ namespace EbisuWebApi.Application.Services.Implementations
 
             return _mapper.Map<UserDto>(_mapper.Map<UserEntity>(await _unitOfWork.Users.GetEntity(id)));
             //_unitOfWork.Complete();
+        }
+
+        public async Task<UserLoginTokenDto> LoginUser(UserLoginDto userDTO)
+        {
+            UserDataModel entityDataModel = _mapper.Map<UserDataModel>(_mapper.Map<UserEntity>(userDTO));
+
+            if (entityDataModel == null) throw new IncorrectCredentials();
+            
+            return  _mapper.Map<UserLoginTokenDto>(_mapper.Map<UserEntity>( await _unitOfWork.Users.Login(entityDataModel)));
         }
 
         public async Task<UserDto> RemoveUser(int id)

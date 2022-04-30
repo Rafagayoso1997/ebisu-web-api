@@ -10,5 +10,8 @@ namespace EbisuWebApi.Domain.RepositoryContracts.Contracts
 {
     public interface IUserRepository : IGenericRepository<UserDataModel>
     {
+        Task<UserDataModel> Login(UserDataModel userDataModel);
+
+        Task<bool> UserExist(string username);
     }
 }

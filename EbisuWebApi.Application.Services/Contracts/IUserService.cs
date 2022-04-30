@@ -18,5 +18,7 @@ namespace EbisuWebApi.Application.Services.Contracts
         Task<UserDto> UpdateUser(UserDto userDTO);
 
         Task<UserDto> RemoveUser(int id);
+
+        Task<UserLoginTokenDto> LoginUser(UserLoginDto userDTO);
     }
 }
