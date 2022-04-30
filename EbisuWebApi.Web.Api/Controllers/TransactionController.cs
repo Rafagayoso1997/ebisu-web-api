@@ -18,7 +18,7 @@ namespace EbisuWebApi.Web.Api.Controllers
 
 
         [HttpPost]
-        public async Task<IActionResult> SaveTransactionAsync(TransactionDTO transactionDTO)
+        public async Task<IActionResult> SaveTransactionAsync(TransactionDto transactionDTO)
         {
             try
             {
@@ -62,7 +62,7 @@ namespace EbisuWebApi.Web.Api.Controllers
         }
 
         [HttpPut]
-        public async Task<IActionResult> UpdateTransaction(TransactionDTO transactionDTO)
+        public async Task<IActionResult> UpdateTransaction(TransactionDto transactionDTO)
         {
             try
             {

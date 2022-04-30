@@ -25,45 +25,45 @@ namespace EbisuWebApi.Application.Services.Implementations
         }
             
 
-        public async Task<UserDTO> AddUserAsync(UserDTO userDTO)
+        public async Task<UserDto> AddUserAsync(UserDto userDTO)
         {
             UserDataModel entityDataModel = _mapper.Map<UserDataModel>(_mapper.Map<UserEntity>(userDTO));
             
             var result = await _unitOfWork.Users.Add(entityDataModel);
             _unitOfWork.Complete();
             
-            return _mapper.Map<UserDTO>(_mapper.Map<UserEntity>(result));
+            return _mapper.Map<UserDto>(_mapper.Map<UserEntity>(result));
         }
 
-        public async Task<IEnumerable<UserDTO>> GetAll()
+        public async Task<IEnumerable<UserDto>> GetAll()
         {
 
-            return _mapper.Map<IEnumerable<UserDTO>>(_mapper.Map < IEnumerable < UserEntity >>( await _unitOfWork.Users.GetAll()));
+            return _mapper.Map<IEnumerable<UserDto>>(_mapper.Map < IEnumerable < UserEntity >>( await _unitOfWork.Users.GetAll()));
         }
 
-        public async Task<UserDTO> GetById(int id)
+        public async Task<UserDto> GetById(int id)
         {
 
-            return _mapper.Map<UserDTO>(_mapper.Map<UserEntity>(await _unitOfWork.Users.GetEntity(id)));
+            return _mapper.Map<UserDto>(_mapper.Map<UserEntity>(await _unitOfWork.Users.GetEntity(id)));
             //_unitOfWork.Complete();
         }
 
-        public async Task<UserDTO> RemoveUser(int id)
+        public async Task<UserDto> RemoveUser(int id)
         {
-            var userDto = _mapper.Map<UserDTO>(_mapper.Map<UserEntity>(await _unitOfWork.Users.Delete(id)));
+            var userDto = _mapper.Map<UserDto>(_mapper.Map<UserEntity>(await _unitOfWork.Users.Delete(id)));
            
             _unitOfWork.Complete();
             return userDto;
         }
 
-        public async Task<UserDTO> UpdateUser(UserDTO userDTO)
+        public async Task<UserDto> UpdateUser(UserDto userDTO)
         {
             UserDataModel entityDataModel = _mapper.Map<UserDataModel>(_mapper.Map<UserEntity>(userDTO));
 
             var result = await _unitOfWork.Users.Update(entityDataModel);
             _unitOfWork.Complete();
 
-            return _mapper.Map<UserDTO>(_mapper.Map<UserEntity>(result));
+            return _mapper.Map<UserDto>(_mapper.Map<UserEntity>(result));
         }
     }
 }

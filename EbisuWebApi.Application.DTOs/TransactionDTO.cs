@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace EbisuWebApi.Application.Dtos
 {
-    public class TransactionDTO
+    public class TransactionDto
     {
         public int TransactionId { get; set; }
         public string Description { get; set; }

@@ -9,14 +9,14 @@ namespace EbisuWebApi.Application.Services.Contracts
 {
     public interface ITransactionService
     {
-        Task<TransactionDTO> AddTransactionAsync(TransactionDTO transactionDTO);
+        Task<TransactionDto> AddTransactionAsync(TransactionDto transactionDTO);
 
-        Task<IEnumerable<TransactionDTO>> GetAllTransactions();
+        Task<IEnumerable<TransactionDto>> GetAllTransactions();
 
-        Task<TransactionDTO> GeTransactionById(int id);
+        Task<TransactionDto> GeTransactionById(int id);
 
-        Task<TransactionDTO> UpdateTransaction(TransactionDTO transactionDTO);
+        Task<TransactionDto> UpdateTransaction(TransactionDto transactionDTO);
 
-        Task<TransactionDTO> RemoveTransaction(int id);
+        Task<TransactionDto> RemoveTransaction(int id);
     }
 }
