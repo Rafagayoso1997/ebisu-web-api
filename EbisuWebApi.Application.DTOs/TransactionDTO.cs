@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace EbisuWebApi.Application.DTOs
+namespace EbisuWebApi.Application.Dtos
 {
     public class TransactionDTO
     {

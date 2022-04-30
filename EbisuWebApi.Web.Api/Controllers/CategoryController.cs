@@ -1,4 +1,4 @@
-﻿using EbisuWebApi.Application.DTOs;
+﻿using EbisuWebApi.Application.Dtos;
 using EbisuWebApi.Application.Services.Contracts;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;

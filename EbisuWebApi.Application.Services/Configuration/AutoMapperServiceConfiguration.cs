@@ -1,5 +1,5 @@
 ﻿using AutoMapper;
-using EbisuWebApi.Application.DTOs;
+using EbisuWebApi.Application.Dtos;
 using EbisuWebApi.Crosscutting.Utils;
 using EbisuWebApi.Domain.Entities;
 using EbisuWebApi.Infrastructure.DataModel;

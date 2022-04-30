@@ -1,5 +1,5 @@
 ﻿using AutoMapper;
-using EbisuWebApi.Application.DTOs;
+using EbisuWebApi.Application.Dtos;
 using EbisuWebApi.Application.Services.Contracts;
 using EbisuWebApi.Domain.Entities;
 using EbisuWebApi.Domain.RepositoryContracts.Contracts;

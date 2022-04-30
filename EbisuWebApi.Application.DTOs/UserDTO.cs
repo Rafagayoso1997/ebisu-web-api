@@ -1,4 +1,4 @@
-﻿namespace EbisuWebApi.Application.DTOs
+﻿namespace EbisuWebApi.Application.Dtos
 {
     public class UserDTO
     {
