@@ -1,4 +1,4 @@
-﻿using EbisuWebApi.Application.DTOs;
+﻿using EbisuWebApi.Application.Dtos;
 using System;
 using System.Collections.Generic;
 using System.Linq;
