@@ -38,6 +38,11 @@ namespace EbisuWebApi.Application.Services.Implementations
             return _mapper.Map<IEnumerable<TransactionDto>>(_mapper.Map<IEnumerable<TransactionEntity>>(await _unitOfWork.Transactions.GetAll()));
         }
 
+        public async Task<IEnumerable<TransactionDto>> GetAllTransactionsByUserId(int userId)
+        {
+            return _mapper.Map<IEnumerable<TransactionDto>>(_mapper.Map<IEnumerable<TransactionEntity>>(await _unitOfWork.Transactions.GetTransactionsByUserId(userId)));
+        }
+
         public async Task<TransactionDto> GeTransactionById(int id)
         {
             return _mapper.Map<TransactionDto>(_mapper.Map<TransactionEntity>(await _unitOfWork.Transactions.GetEntity(id)));

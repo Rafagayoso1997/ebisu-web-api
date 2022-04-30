@@ -2,6 +2,7 @@
 using EbisuWebApi.Domain.RepositoryContracts.Contracts;
 using EbisuWebApi.Infrastructure.DataModel;
 using EbisuWebApi.Infrastructure.Persistence.DataBaseContext;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -16,6 +17,9 @@ namespace EbisuWebApi.Infrastructure.Repositories.Implementations
         {
         }
 
-        
+        public async Task<IEnumerable<TransactionDataModel>> GetTransactionsByUserId(int userId)
+        {
+            return await _context.Transactions.Where(x => x.UserId == userId).ToListAsync();
+        }
     }
 }

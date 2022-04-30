@@ -47,12 +47,26 @@ namespace EbisuWebApi.Web.Api.Controllers
 
         }
 
-        [HttpGet("{id}")]
+        [HttpGet("GetById/{id}")]
         public async Task<IActionResult> GetTransactionById(int id)
         {
             try
             {
                 return Ok(await _transactionService.GeTransactionById(id));
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+
+        }
+
+        [HttpGet("GetByUser/{userId}")]
+        public async Task<IActionResult> GetTransactionByUserId(int userId)
+        {
+            try
+            {
+                return Ok(await _transactionService.GetAllTransactionsByUserId(userId));
             }
             catch (Exception ex)
             {
