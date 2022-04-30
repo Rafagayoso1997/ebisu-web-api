@@ -16,20 +16,20 @@ namespace EbisuWebApi.Application.Services.Configuration
     {
         public AutoMapperServiceConfiguration()
         {
-            CreateMap<UserDTO, UserEntity>()
+            CreateMap<UserDto, UserEntity>()
                 .ForMember(dest => dest.Password, opt => opt.MapFrom(src => Encoding.EncryptStringToBytes_Aes(src.Password)));
 
             CreateMap<CategoryDto, CategoryEntity>()
                 .ForMember(dest => dest.Type, opt => opt.MapFrom(src => Enum.Parse(typeof(CategoryType), src.Type)));
 
-            CreateMap<UserEntity, UserDTO>();
+            CreateMap<UserEntity, UserDto>();
             CreateMap<CategoryEntity, CategoryDto>();
 
             CreateMap<UserEntity, UserDataModel>().ReverseMap();
             CreateMap<CategoryEntity, CategoryDataModel>().ReverseMap();
 
             CreateMap<TransactionEntity, TransactionDataModel>().ReverseMap();
-            CreateMap<TransactionEntity, TransactionDTO>().ReverseMap();
+            CreateMap<TransactionEntity, TransactionDto>().ReverseMap();
 
         }
     }

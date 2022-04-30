@@ -23,42 +23,42 @@ namespace EbisuWebApi.Application.Services.Implementations
             _mapper = mapper;
         }
 
-        public async Task<TransactionDTO> AddTransactionAsync(TransactionDTO transactionDTO)
+        public async Task<TransactionDto> AddTransactionAsync(TransactionDto transactionDTO)
         {
             TransactionDataModel transactionDataModel = _mapper.Map<TransactionDataModel>(_mapper.Map<TransactionEntity>(transactionDTO));
 
             var result = await _unitOfWork.Transactions.Add(transactionDataModel);
             _unitOfWork.Complete();
 
-            return _mapper.Map<TransactionDTO>(_mapper.Map<TransactionEntity>(result));
+            return _mapper.Map<TransactionDto>(_mapper.Map<TransactionEntity>(result));
         }
 
-        public async Task<IEnumerable<TransactionDTO>> GetAllTransactions()
+        public async Task<IEnumerable<TransactionDto>> GetAllTransactions()
         {
-            return _mapper.Map<IEnumerable<TransactionDTO>>(_mapper.Map<IEnumerable<TransactionEntity>>(await _unitOfWork.Transactions.GetAll()));
+            return _mapper.Map<IEnumerable<TransactionDto>>(_mapper.Map<IEnumerable<TransactionEntity>>(await _unitOfWork.Transactions.GetAll()));
         }
 
-        public async Task<TransactionDTO> GeTransactionById(int id)
+        public async Task<TransactionDto> GeTransactionById(int id)
         {
-            return _mapper.Map<TransactionDTO>(_mapper.Map<TransactionEntity>(await _unitOfWork.Transactions.GetEntity(id)));
+            return _mapper.Map<TransactionDto>(_mapper.Map<TransactionEntity>(await _unitOfWork.Transactions.GetEntity(id)));
         }
 
-        public async Task<TransactionDTO> RemoveTransaction(int id)
+        public async Task<TransactionDto> RemoveTransaction(int id)
         {
-            var transactionDto = _mapper.Map<TransactionDTO>(_mapper.Map<TransactionEntity>(await _unitOfWork.Transactions.Delete(id)));
+            var transactionDto = _mapper.Map<TransactionDto>(_mapper.Map<TransactionEntity>(await _unitOfWork.Transactions.Delete(id)));
 
             _unitOfWork.Complete();
             return transactionDto;
         }
 
-        public async Task<TransactionDTO> UpdateTransaction(TransactionDTO transactionDTO)
+        public async Task<TransactionDto> UpdateTransaction(TransactionDto transactionDTO)
         {
             var entityDataModel = _mapper.Map<TransactionDataModel>(_mapper.Map<TransactionEntity>(transactionDTO));
 
             var result = await _unitOfWork.Transactions.Update(entityDataModel);
             _unitOfWork.Complete();
 
-            return _mapper.Map<TransactionDTO>(_mapper.Map<TransactionEntity>(result));
+            return _mapper.Map<TransactionDto>(_mapper.Map<TransactionEntity>(result));
         }
     }
 }

@@ -18,7 +18,7 @@ namespace EbisuWebApi.Web.Api.Controllers
 
 
         [HttpPost]
-        public async Task<IActionResult> SaveUserAsync(UserDTO userDto)
+        public async Task<IActionResult> SaveUserAsync(UserDto userDto)
         {
             try
             {
@@ -63,7 +63,7 @@ namespace EbisuWebApi.Web.Api.Controllers
 
         // PUT api/<InvoiceController>/5
         [HttpPut]
-        public async Task<IActionResult> PutAsync(UserDTO userDTO)
+        public async Task<IActionResult> PutAsync(UserDto userDTO)
         {
             try
             {

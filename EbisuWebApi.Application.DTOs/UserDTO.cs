@@ -1,6 +1,6 @@
 ﻿namespace EbisuWebApi.Application.Dtos
 {
-    public class UserDTO
+    public class UserDto
     {
         public int UserId { get; set; }
         public string UserName { get; set; }
