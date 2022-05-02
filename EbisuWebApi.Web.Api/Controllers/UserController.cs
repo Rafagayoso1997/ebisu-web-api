@@ -92,7 +92,7 @@ namespace EbisuWebApi.Web.Api.Controllers
 
         // PUT api/<InvoiceController>/5
         [HttpPut]
-        public async Task<IActionResult> PutAsync(UserDto userDTO)
+        public async Task<IActionResult> PutAsync(UserDto userDto)
         {
             try
             {
@@ -101,7 +101,7 @@ namespace EbisuWebApi.Web.Api.Controllers
                 {
                     return BadRequest(validatorResult.Errors);
                 }
-                return Ok(await _userService.UpdateUser(userDTO));
+                return Ok(await _userService.UpdateUser(userDto));
             }
             catch (Exception ex)
             {
