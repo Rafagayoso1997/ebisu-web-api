@@ -1,5 +1,7 @@
 ﻿using EbisuWebApi.Application.Dtos;
 using EbisuWebApi.Application.Services.Contracts;
+using EbisuWebApi.Web.Validation;
+using FluentValidation;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -12,11 +14,14 @@ namespace EbisuWebApi.Web.Api.Controllers
     public class UserController : ControllerBase
     {
         private readonly IUserService _userService;
+        private readonly IValidator<UserDto> _validator;
 
-        public UserController(IUserService userService)
+        public UserController(IUserService userService, IValidator<UserDto> validator)
         {
             _userService = userService;
+            _validator = validator;
         }
+       
 
         [AllowAnonymous]
         [HttpPost]
@@ -24,7 +29,14 @@ namespace EbisuWebApi.Web.Api.Controllers
         {
             try
             {
-                return Ok(await _userService.AddUserAsync(userDto));
+               
+                var validatorResult = await _validator.ValidateAsync(userDto);
+                if (!validatorResult.IsValid)
+                {
+                    return BadRequest(validatorResult.Errors);
+                }
+                
+                return Ok(await _userService.AddUserAsync(userDto)); 
             }
             catch (Exception ex)
             {
@@ -84,7 +96,11 @@ namespace EbisuWebApi.Web.Api.Controllers
         {
             try
             {
-                
+                var validatorResult = await _validator.ValidateAsync(userDto);
+                if (!validatorResult.IsValid)
+                {
+                    return BadRequest(validatorResult.Errors);
+                }
                 return Ok(await _userService.UpdateUser(userDTO));
             }
             catch (Exception ex)
