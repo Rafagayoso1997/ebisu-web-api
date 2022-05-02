@@ -2,6 +2,7 @@ using EbisuWebApi.Application.Services.Configuration;
 using EbisuWebApi.Application.Services.Contracts;
 using EbisuWebApi.Application.Services.Implementations;
 using EbisuWebApi.Web.Api.Configuration;
+using FluentValidation.AspNetCore;
 using Microsoft.OpenApi.Models;
 using Swashbuckle.AspNetCore.Filters;
 
@@ -9,7 +10,7 @@ var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 
-builder.Services.AddControllers();
+builder.Services.AddControllers().AddFluentValidation();
 builder.Services.ConfigureWebAPILayer(builder.Configuration);
 
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
@@ -27,6 +28,7 @@ builder.Services.AddSwaggerGen(options =>
     options.OperationFilter<SecurityRequirementsOperationFilter>();
 });
 builder.Services.AddAutoMapper(typeof(AutoMapperServiceConfiguration));
+
 
 var app = builder.Build();
 

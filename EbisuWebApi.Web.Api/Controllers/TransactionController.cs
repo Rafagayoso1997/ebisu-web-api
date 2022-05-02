@@ -1,5 +1,6 @@
 ﻿using EbisuWebApi.Application.Dtos;
 using EbisuWebApi.Application.Services.Contracts;
+using FluentValidation;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -13,10 +14,12 @@ namespace EbisuWebApi.Web.Api.Controllers
     public class TransactionController : ControllerBase
     {
         private readonly ITransactionService _transactionService;
+        private readonly IValidator<TransactionDto> _validator;
 
-        public TransactionController(ITransactionService transactionService)
+        public TransactionController(ITransactionService transactionService, IValidator<TransactionDto> validator)
         {
             _transactionService = transactionService;
+            _validator = validator;
         }
 
 
@@ -25,6 +28,11 @@ namespace EbisuWebApi.Web.Api.Controllers
         {
             try
             {
+                var validatorResult = await _validator.ValidateAsync(transactionDTO);
+                if (!validatorResult.IsValid)
+                {
+                    return BadRequest(validatorResult.Errors);
+                }
                 return Ok(await _transactionService.AddTransactionAsync(transactionDTO));
             }
             catch (Exception ex)
@@ -84,7 +92,11 @@ namespace EbisuWebApi.Web.Api.Controllers
         {
             try
             {
-
+                var validatorResult = await _validator.ValidateAsync(transactionDTO);
+                if (!validatorResult.IsValid)
+                {
+                    return BadRequest(validatorResult.Errors);
+                }
                 return Ok(await _transactionService.UpdateTransaction(transactionDTO));
             }
             catch (Exception ex)

@@ -1,5 +1,6 @@
 ﻿using EbisuWebApi.Application.Dtos;
 using EbisuWebApi.Application.Services.Contracts;
+using FluentValidation;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -11,18 +12,25 @@ namespace EbisuWebApi.Web.Api.Controllers
     public class CategoryController : ControllerBase
     {
         private readonly ICategoryService _categoryService;
+        private readonly IValidator<CategoryDto> _validator;
 
-        public CategoryController(ICategoryService categoryService)
+        public CategoryController(ICategoryService categoryService, IValidator<CategoryDto> validator)
         {
             _categoryService = categoryService;
+            _validator = validator;
         }
 
 
         [HttpPost]
-        public async Task<IActionResult> SaveUserAsync(CategoryDto categoryDto)
+        public async Task<IActionResult> SaveCategoryAsync(CategoryDto categoryDto)
         {
             try
             {
+                var validatorResult = await _validator.ValidateAsync(categoryDto);
+                if (!validatorResult.IsValid)
+                {
+                    return BadRequest(validatorResult.Errors);
+                }
                 return Ok(await _categoryService.AddCategoryAsync(categoryDto));
             }
             catch (Exception ex)
@@ -49,7 +57,7 @@ namespace EbisuWebApi.Web.Api.Controllers
         }
 
         [HttpGet("{id}")]
-        public async Task<IActionResult> GetUserById(int id)
+        public async Task<IActionResult> GetCategoryById(int id)
         {
             try
             {
@@ -68,7 +76,11 @@ namespace EbisuWebApi.Web.Api.Controllers
         {
             try
             {
-
+                var validatorResult = await _validator.ValidateAsync(categoryDto);
+                if (!validatorResult.IsValid)
+                {
+                    return BadRequest(validatorResult.Errors);
+                }
                 return Ok(await _categoryService.UpdateCategory(categoryDto));
             }
             catch (Exception ex)
