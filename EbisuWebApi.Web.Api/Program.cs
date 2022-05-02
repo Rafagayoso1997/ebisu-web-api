@@ -9,7 +9,7 @@ using Swashbuckle.AspNetCore.Filters;
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
-
+builder.WebHost.UseKestrel(options => options.AddServerHeader = false);
 builder.Services.AddControllers().AddFluentValidation();
 builder.Services.ConfigureWebAPILayer(builder.Configuration);
 
