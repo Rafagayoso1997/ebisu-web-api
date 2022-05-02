@@ -9,7 +9,7 @@ namespace EbisuWebApi.Crosscutting.Exceptions
 {
     public class IncorrectCredentials : Exception
     {
-        public IncorrectCredentials() : base(MessagesResource.UserNameAlreadyExist)
+        public IncorrectCredentials() : base(MessagesResource.UsernameAndPasswordIncorrect)
         {
         }
 
