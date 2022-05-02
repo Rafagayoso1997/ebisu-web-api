@@ -12,7 +12,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\EbisuWebApi.Application.DTOs\EbisuWebApi.Application.Dtos.csproj" />
+    <ProjectReference Include="..\EbisuWebApi.Application.Dtos\EbisuWebApi.Application.Dtos.csproj" />
   </ItemGroup>
 
 </Project>
