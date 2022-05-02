@@ -33,7 +33,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EbisuWebApi.Crosscutting.Se
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EbisuWebApi.Crosscutting.ResourcesManagement", "EbisuWebApi.Crosscutting.ResourcesManagement\EbisuWebApi.Crosscutting.ResourcesManagement.csproj", "{B127CF3B-8427-49EC-B3E6-00D8A75AF92A}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EbisuWebApi.Application.Dtos", "EbisuWebApi.Application.DTOs\EbisuWebApi.Application.Dtos.csproj", "{F1A60B2D-0F92-49BE-8085-3FB10D17DD21}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EbisuWebApi.Application.Dtos", "EbisuWebApi.Application.Dtos\EbisuWebApi.Application.Dtos.csproj", "{F1A60B2D-0F92-49BE-8085-3FB10D17DD21}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EbisuWebApi.Crosscutting.Utils", "EbisuWebApi.Crosscutting.Utils\EbisuWebApi.Crosscutting.Utils.csproj", "{E8AA2708-86AE-4902-96B2-80D8154714C9}"
 EndProject
