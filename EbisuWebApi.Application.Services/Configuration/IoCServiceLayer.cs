@@ -22,9 +22,10 @@ namespace EbisuWebApi.Application.Services.Configuration
             services.AddDbContext<DatabaseContext>(options =>
             {
                 var serverVersion = new MySqlServerVersion(new Version(5, 6, 50));
-                options.UseMySql(configuration.GetConnectionString("DefaultConnection"), serverVersion);
+                options.UseMySql(connectionString, serverVersion);
             });
-
+            services.BuildServiceProvider().GetService<DatabaseContext>().Database.MigrateAsync();
+            
             return services;
         }
     }
