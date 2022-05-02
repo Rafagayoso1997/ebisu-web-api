@@ -4,12 +4,14 @@ using EbisuWebApi.Application.Services.Implementations;
 using EbisuWebApi.Web.Api.Configuration;
 using FluentValidation.AspNetCore;
 using Microsoft.OpenApi.Models;
+using Serilog;
 using Swashbuckle.AspNetCore.Filters;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
-builder.WebHost.UseKestrel(options => options.AddServerHeader = false);
+//builder.WebHost.UseKestrel(options => options.AddServerHeader = false);
+
 builder.Services.AddControllers().AddFluentValidation();
 builder.Services.ConfigureWebAPILayer(builder.Configuration);
 
@@ -27,8 +29,14 @@ builder.Services.AddSwaggerGen(options =>
     });
     options.OperationFilter<SecurityRequirementsOperationFilter>();
 });
+
 builder.Services.AddAutoMapper(typeof(AutoMapperServiceConfiguration));
 
+Log.Logger = new LoggerConfiguration()
+                            .ReadFrom.Configuration(builder.Configuration)
+                            .Enrich.FromLogContext()
+                            .CreateLogger();
+builder.Host.UseSerilog();
 
 var app = builder.Build();
 

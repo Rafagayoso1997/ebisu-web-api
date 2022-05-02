@@ -7,6 +7,7 @@ using FluentValidation;
 using FluentValidation.AspNetCore;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
+using Serilog;
 using System.Text;
 
 namespace EbisuWebApi.Web.Api.Configuration
@@ -15,6 +16,7 @@ namespace EbisuWebApi.Web.Api.Configuration
     {
         public static IServiceCollection ConfigureWebAPILayer(this IServiceCollection services, IConfiguration configuration)
         {
+            
             services.AddTransient<IUserService, UserService>();
             services.AddTransient<ICategoryService, CategoryService>();
             services.AddTransient<ITransactionService, TransactionService>();
