@@ -26,6 +26,41 @@ namespace EbisuWebApi.Infrastructure.Persistence.ModelConfigurations
                 .HasConversion(
                     v => v.ToString(),
                     v => (CategoryType)Enum.Parse(typeof(CategoryType), v));
+
+            SeedDefaultCategories(builder);
+        }
+
+        private void SeedDefaultCategories(EntityTypeBuilder<CategoryDataModel> builder)
+        {
+            builder.HasData(
+                new CategoryDataModel
+                {
+                    CategoryId = 1,
+                    Name = "Comida",
+                    ImageUrl = "asd",
+                    Description = "Comida",
+                    IsDefault = true,
+                    Type = CategoryType.Gasto
+                },
+                new CategoryDataModel
+                {
+                    CategoryId = 2,
+                    Name = "Transporte",
+                    ImageUrl = "asd",
+                    Description = "Transporte",
+                    IsDefault = true,
+                    Type = CategoryType.Gasto
+                },
+                new CategoryDataModel
+                {
+                    CategoryId = 3,
+                    Name = "Salario",
+                    ImageUrl = "asd",
+                    Description = "Salario",
+                    IsDefault = true,
+                    Type = CategoryType.Ingreso
+                }
+                );
         }
     }
 }
