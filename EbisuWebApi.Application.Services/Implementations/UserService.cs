@@ -4,6 +4,7 @@ using EbisuWebApi.Application.Services.Contracts;
 using EbisuWebApi.Crosscutting.Exceptions;
 using EbisuWebApi.Domain.Entities;
 using EbisuWebApi.Domain.RepositoryContracts.Contracts;
+using EbisuWebApi.Domain.Services.Contracts;
 using EbisuWebApi.Infrastructure.DataModel;
 using EbisuWebApi.Infrastructure.Repositories;
 using System;
@@ -18,11 +19,13 @@ namespace EbisuWebApi.Application.Services.Implementations
     {
         private readonly IUnitOfWork _unitOfWork;
         private readonly IMapper _mapper;
+        private readonly IUserDomainService _userDomainService;
 
-        public UserService(IUnitOfWork unitOfWork, IMapper mapper)
+        public UserService(IUnitOfWork unitOfWork, IMapper mapper, IUserDomainService userDomainService)
         {
             _unitOfWork = unitOfWork;
             _mapper = mapper;
+            _userDomainService = userDomainService;
         }
             
 
@@ -33,6 +36,10 @@ namespace EbisuWebApi.Application.Services.Implementations
 
             bool userExist = await _unitOfWork.Users.UserExist(entityDataModel.UserName);
             if (userExist) throw new UserNameAlreadyExistException();
+
+            var defaultCategories = await _unitOfWork.Categories.GetDefaultCategories();
+
+            _userDomainService.AddDefaultCategoriesToUser(entityDataModel, defaultCategories);
 
             var result = await _unitOfWork.Users.Add(entityDataModel);
             _unitOfWork.Complete();
@@ -57,9 +64,11 @@ namespace EbisuWebApi.Application.Services.Implementations
         {
             UserDataModel entityDataModel = _mapper.Map<UserDataModel>(_mapper.Map<UserEntity>(userDTO));
 
-            if (entityDataModel == null) throw new IncorrectCredentials();
-            
-            return  _mapper.Map<UserLoginTokenDto>(_mapper.Map<UserEntity>( await _unitOfWork.Users.Login(entityDataModel)));
+            UserLoginTokenDto userLoginTokenDto = _mapper.Map<UserLoginTokenDto>(_mapper.Map<UserEntity>(await _unitOfWork.Users.Login(entityDataModel)));
+
+            if (userLoginTokenDto == null) throw new IncorrectCredentials();
+
+            return userLoginTokenDto;
         }
 
         public async Task<UserDto> RemoveUser(int id)

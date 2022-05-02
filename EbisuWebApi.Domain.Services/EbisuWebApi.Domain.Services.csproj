@@ -6,4 +6,8 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\EbisuWebApi.Infrastructure.DataModel\EbisuWebApi.Infrastructure.DataModel.csproj" />
+  </ItemGroup>
+
 </Project>

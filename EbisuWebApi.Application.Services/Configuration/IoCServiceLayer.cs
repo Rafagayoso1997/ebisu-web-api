@@ -1,5 +1,7 @@
 ﻿using EbisuWebApi.Crosscutting.ResourcesManagement;
 using EbisuWebApi.Domain.RepositoryContracts.Contracts;
+using EbisuWebApi.Domain.Services.Contracts;
+using EbisuWebApi.Domain.Services.Implementations;
 using EbisuWebApi.Infrastructure.Persistence.DataBaseContext;
 using EbisuWebApi.Infrastructure.Repositories.Implementations;
 using Microsoft.EntityFrameworkCore;
@@ -13,8 +15,9 @@ namespace EbisuWebApi.Application.Services.Configuration
         private static readonly string connectionString = DatabaseConnection.ConnectionString;
         public static IServiceCollection ConfigureServicesLayer(this IServiceCollection services, IConfiguration configuration)
         {
-
+            
             services.AddTransient<IUserRepository, UserRepository>();
+            services.AddTransient<IUserDomainService, UserDomainService>();
             services.AddTransient<ICategoryRepository, CategoryRepository>();
             services.AddTransient<ITransactionRepository, TransactionRepository>();
             services.AddTransient<IUnitOfWork, UnitOfWork>();

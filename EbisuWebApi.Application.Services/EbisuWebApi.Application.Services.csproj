@@ -23,6 +23,7 @@
     <ProjectReference Include="..\EbisuWebApi.Application.Dtos\EbisuWebApi.Application.Dtos.csproj" />
     <ProjectReference Include="..\EbisuWebApi.Crosscutting.Exceptions\EbisuWebApi.Crosscutting.Exceptions.csproj" />
     <ProjectReference Include="..\EbisuWebApi.Crosscutting.ResourcesManagement\EbisuWebApi.Crosscutting.ResourcesManagement.csproj" />
+    <ProjectReference Include="..\EbisuWebApi.Domain.Services\EbisuWebApi.Domain.Services.csproj" />
     <ProjectReference Include="..\EbisuWebApi.Infrastructure.Persistence\EbisuWebApi.Infrastructure.Persistence.csproj" />
     <ProjectReference Include="..\EbisuWebApi.Infrastructure.Repositories\EbisuWebApi.Infrastructure.Repositories.csproj" />
   </ItemGroup>
