@@ -15,11 +15,13 @@ namespace EbisuWebApi.Web.Api.Controllers
     {
         private readonly IUserService _userService;
         private readonly IValidator<UserDto> _validator;
+        private readonly ILogger<UserController> _logger;
 
-        public UserController(IUserService userService, IValidator<UserDto> validator)
+        public UserController(IUserService userService, IValidator<UserDto> validator, ILogger<UserController> logger)
         {
             _userService = userService;
             _validator = validator;
+            _logger = logger;
         }
        
 
@@ -81,7 +83,7 @@ namespace EbisuWebApi.Web.Api.Controllers
         {
             try
             {
-
+                _logger.LogInformation(userDTO.UserName);
                 return Ok(await _userService.LoginUser(userDTO));
             }
             catch (Exception ex)

@@ -8,6 +8,7 @@ EXPOSE 443
 FROM mcr.microsoft.com/dotnet/sdk:6.0 AS build
 WORKDIR /src
 COPY ["EbisuWebApi.Web.Api/EbisuWebApi.Web.Api.csproj", "EbisuWebApi.Web.Api/"]
+COPY ["EbisuWebApi.Web.Validation/EbisuWebApi.Web.Validation.csproj", "EbisuWebApi.Web.Validation/"]
 COPY ["EbisuWebApi.Application.Dtos/EbisuWebApi.Application.Dtos.csproj", "EbisuWebApi.Application.Dtos/"]
 COPY ["EbisuWebApi.Application.Services/EbisuWebApi.Application.Services.csproj", "EbisuWebApi.Application.Services/"]
 COPY ["EbisuWebApi.Crosscutting.ResourcesManagement/EbisuWebApi.Crosscutting.ResourcesManagement.csproj", "EbisuWebApi.Crosscutting.ResourcesManagement/"]
