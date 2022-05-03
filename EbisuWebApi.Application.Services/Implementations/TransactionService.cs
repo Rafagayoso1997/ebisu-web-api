@@ -3,6 +3,7 @@ using EbisuWebApi.Application.Dtos;
 using EbisuWebApi.Application.Services.Contracts;
 using EbisuWebApi.Domain.Entities;
 using EbisuWebApi.Domain.RepositoryContracts.Contracts;
+using EbisuWebApi.Domain.Services.Contracts;
 using EbisuWebApi.Infrastructure.DataModel;
 using System;
 using System.Collections.Generic;
@@ -16,16 +17,20 @@ namespace EbisuWebApi.Application.Services.Implementations
     {
         private readonly IUnitOfWork _unitOfWork;
         private readonly IMapper _mapper;
+        private readonly ITransactionDomainService _transactionDomainService;
 
-        public TransactionService(IUnitOfWork unitOfWork, IMapper mapper)
+        public TransactionService(IUnitOfWork unitOfWork, IMapper mapper, ITransactionDomainService transactionDomainService)
         {
             _unitOfWork = unitOfWork;
             _mapper = mapper;
+            _transactionDomainService = transactionDomainService;
         }
 
         public async Task<TransactionDto> AddTransactionAsync(TransactionDto transactionDTO)
         {
             TransactionDataModel transactionDataModel = _mapper.Map<TransactionDataModel>(_mapper.Map<TransactionEntity>(transactionDTO));
+
+            await _transactionDomainService.ValidateTransactionData(transactionDataModel);
 
             var result = await _unitOfWork.Transactions.Add(transactionDataModel);
             _unitOfWork.Complete();
@@ -59,7 +64,9 @@ namespace EbisuWebApi.Application.Services.Implementations
         public async Task<TransactionDto> UpdateTransaction(TransactionDto transactionDTO)
         {
             var entityDataModel = _mapper.Map<TransactionDataModel>(_mapper.Map<TransactionEntity>(transactionDTO));
-
+            
+            await _transactionDomainService.ValidateTransactionData(entityDataModel);
+            
             var result = await _unitOfWork.Transactions.Update(entityDataModel);
             _unitOfWork.Complete();
 

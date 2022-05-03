@@ -13,12 +13,10 @@ namespace EbisuWebApi.Web.Api.Controllers
     public class CategoryController : ControllerBase
     {
         private readonly ICategoryService _categoryService;
-        private readonly IValidator<CategoryDto> _validator;
 
-        public CategoryController(ICategoryService categoryService, IValidator<CategoryDto> validator)
+        public CategoryController(ICategoryService categoryService)
         {
             _categoryService = categoryService;
-            _validator = validator;
         }
 
 
@@ -27,11 +25,6 @@ namespace EbisuWebApi.Web.Api.Controllers
         {
             try
             {
-                var validatorResult = await _validator.ValidateAsync(categoryDto);
-                if (!validatorResult.IsValid)
-                {
-                    return BadRequest(validatorResult.Errors);
-                }
                 return Ok(await _categoryService.AddCategoryAsync(categoryDto));
             }
             catch (Exception ex)
@@ -77,11 +70,7 @@ namespace EbisuWebApi.Web.Api.Controllers
         {
             try
             {
-                var validatorResult = await _validator.ValidateAsync(categoryDto);
-                if (!validatorResult.IsValid)
-                {
-                    return BadRequest(validatorResult.Errors);
-                }
+               
                 return Ok(await _categoryService.UpdateCategory(categoryDto));
             }
             catch (Exception ex)

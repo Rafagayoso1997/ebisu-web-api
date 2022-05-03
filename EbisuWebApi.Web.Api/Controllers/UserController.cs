@@ -1,6 +1,6 @@
 ﻿using EbisuWebApi.Application.Dtos;
 using EbisuWebApi.Application.Services.Contracts;
-using EbisuWebApi.Web.Validation;
+using EbisuWebApi.Crosscutting.Exceptions;
 using FluentValidation;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
@@ -15,13 +15,11 @@ namespace EbisuWebApi.Web.Api.Controllers
     public class UserController : ControllerBase
     {
         private readonly IUserService _userService;
-        private readonly IValidator<UserDto> _validator;
         private readonly ILogger<UserController> _logger;
 
-        public UserController(IUserService userService, IValidator<UserDto> validator, ILogger<UserController> logger)
+        public UserController(IUserService userService, ILogger<UserController> logger)
         {
             _userService = userService;
-            _validator = validator;
             _logger = logger;
         }
        
@@ -33,15 +31,9 @@ namespace EbisuWebApi.Web.Api.Controllers
             try
             {
                
-                var validatorResult = await _validator.ValidateAsync(userDto);
-                if (!validatorResult.IsValid)
-                {
-                    return BadRequest(validatorResult.Errors);
-                }
-                
                 return Ok(await _userService.AddUserAsync(userDto)); 
             }
-            catch (Exception ex)
+            catch (ModelValidationException ex)
             {
 
                 return BadRequest(ex.Message);
@@ -99,11 +91,6 @@ namespace EbisuWebApi.Web.Api.Controllers
         {
             try
             {
-                var validatorResult = await _validator.ValidateAsync(userDto);
-                if (!validatorResult.IsValid)
-                {
-                    return BadRequest(validatorResult.Errors);
-                }
                 return Ok(await _userService.UpdateUser(userDto));
             }
             catch (Exception ex)
