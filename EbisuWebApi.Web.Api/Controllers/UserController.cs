@@ -9,8 +9,9 @@ using Microsoft.AspNetCore.Mvc;
 namespace EbisuWebApi.Web.Api.Controllers
 {
     [Authorize]
-    [Route("api/[controller]")]
     [ApiController]
+    [Route("api/v{version:apiVersion}/Users")]
+    [ApiVersion("1.0")]
     public class UserController : ControllerBase
     {
         private readonly IUserService _userService;

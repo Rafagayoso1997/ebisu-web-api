@@ -7,8 +7,9 @@ using Microsoft.AspNetCore.Mvc;
 namespace EbisuWebApi.Web.Api.Controllers
 {
     [Authorize]
-    [Route("api/[controller]")]
     [ApiController]
+    [Route("api/v{version:apiVersion}/Categories")]
+    [ApiVersion("1.0")]
     public class CategoryController : ControllerBase
     {
         private readonly ICategoryService _categoryService;

@@ -6,6 +6,7 @@ using EbisuWebApi.Web.Validation;
 using FluentValidation;
 using FluentValidation.AspNetCore;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Mvc.Versioning;
 using Microsoft.IdentityModel.Tokens;
 using Serilog;
 using System.Text;
@@ -16,13 +17,13 @@ namespace EbisuWebApi.Web.Api.Configuration
     {
         public static IServiceCollection ConfigureWebAPILayer(this IServiceCollection services, IConfiguration configuration)
         {
-            
+
             services.AddTransient<IUserService, UserService>();
             services.AddTransient<ICategoryService, CategoryService>();
             services.AddTransient<ITransactionService, TransactionService>();
-            
+
             services.AddValidatorsFromAssembly(typeof(UserDtoValidator).Assembly);
-            
+
             services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
                 .AddJwtBearer(options =>
                 {
@@ -34,7 +35,24 @@ namespace EbisuWebApi.Web.Api.Configuration
                         IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(Environment.GetEnvironmentVariable("JWT_SECRET_KEY")))
                     };
                 });
-                
+
+            services.AddApiVersioning(o =>
+             {
+                 o.AssumeDefaultVersionWhenUnspecified = true;
+                 o.DefaultApiVersion = new Microsoft.AspNetCore.Mvc.ApiVersion(1, 0);
+                 o.ReportApiVersions = true;
+                 o.ApiVersionReader = ApiVersionReader.Combine(
+                     new QueryStringApiVersionReader("api-version"),
+                     new HeaderApiVersionReader("X-Version"),
+                     new MediaTypeApiVersionReader("ver"));
+             });
+
+            services.AddVersionedApiExplorer(options =>
+            {
+                options.GroupNameFormat = "'v'VVV";
+                options.SubstituteApiVersionInUrl = true;
+            });
+
             services.ConfigureServicesLayer(configuration);
 
             return services;

@@ -9,8 +9,9 @@ using System.Security.Claims;
 namespace EbisuWebApi.Web.Api.Controllers
 {
     [Authorize]
-    [Route("api/[controller]")]
     [ApiController]
+    [Route("api/v{version:apiVersion}/Transactions")]
+    [ApiVersion("1.0")]
     public class TransactionController : ControllerBase
     {
         private readonly ITransactionService _transactionService;
