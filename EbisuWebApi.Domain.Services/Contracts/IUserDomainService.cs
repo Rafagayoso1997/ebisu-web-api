@@ -1,4 +1,5 @@
-﻿using EbisuWebApi.Infrastructure.DataModel;
+﻿using EbisuWebApi.Application.Dtos;
+using EbisuWebApi.Infrastructure.DataModel;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,5 +11,9 @@ namespace EbisuWebApi.Domain.Services.Contracts
     public interface IUserDomainService
     {
         void AddDefaultCategoriesToUser(UserDataModel userDataModel, IEnumerable<CategoryDataModel> defaultCategories);
+        
+        Task ValidateUserData(UserDataModel userDataModel);
+
+        Task UserExist(UserDataModel userDataModel);
     }
 }

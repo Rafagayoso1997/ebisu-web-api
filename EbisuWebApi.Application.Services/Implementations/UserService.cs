@@ -27,15 +27,16 @@ namespace EbisuWebApi.Application.Services.Implementations
             _mapper = mapper;
             _userDomainService = userDomainService;
         }
-            
 
         public async Task<UserDto> AddUserAsync(UserDto userDTO)
         {
-     
+
+
             UserDataModel entityDataModel = _mapper.Map<UserDataModel>(_mapper.Map<UserEntity>(userDTO));
 
-            bool userExist = await _unitOfWork.Users.UserExist(entityDataModel.UserName);
-            if (userExist) throw new UserNameAlreadyExistException();
+            await _userDomainService.ValidateUserData(entityDataModel);
+            
+            await _userDomainService.UserExist(entityDataModel);
 
             var defaultCategories = await _unitOfWork.Categories.GetDefaultCategories();
 
@@ -43,14 +44,15 @@ namespace EbisuWebApi.Application.Services.Implementations
 
             var result = await _unitOfWork.Users.Add(entityDataModel);
             _unitOfWork.Complete();
-            
+
             return _mapper.Map<UserDto>(_mapper.Map<UserEntity>(result));
+
         }
 
         public async Task<IEnumerable<UserDto>> GetAll()
         {
 
-            return _mapper.Map<IEnumerable<UserDto>>(_mapper.Map < IEnumerable < UserEntity >>( await _unitOfWork.Users.GetAll()));
+            return _mapper.Map<IEnumerable<UserDto>>(_mapper.Map<IEnumerable<UserEntity>>(await _unitOfWork.Users.GetAll()));
         }
 
         public async Task<UserDto> GetById(int id)
@@ -74,7 +76,7 @@ namespace EbisuWebApi.Application.Services.Implementations
         public async Task<UserDto> RemoveUser(int id)
         {
             var userDto = _mapper.Map<UserDto>(_mapper.Map<UserEntity>(await _unitOfWork.Users.Delete(id)));
-           
+
             _unitOfWork.Complete();
             return userDto;
         }
@@ -83,6 +85,8 @@ namespace EbisuWebApi.Application.Services.Implementations
         {
             UserDataModel entityDataModel = _mapper.Map<UserDataModel>(_mapper.Map<UserEntity>(userDTO));
 
+            await _userDomainService.ValidateUserData(entityDataModel);            
+            
             var result = await _unitOfWork.Users.Update(entityDataModel);
             _unitOfWork.Complete();
 

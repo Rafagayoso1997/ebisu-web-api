@@ -33,7 +33,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\EbisuWebApi.Application.Services\EbisuWebApi.Application.Services.csproj" />
-    <ProjectReference Include="..\EbisuWebApi.Web.Validation\EbisuWebApi.Web.Validation.csproj" />
   </ItemGroup>
 
 </Project>

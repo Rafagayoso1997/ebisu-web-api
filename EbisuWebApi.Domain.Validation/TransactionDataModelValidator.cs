@@ -1,4 +1,5 @@
 ﻿using EbisuWebApi.Application.Dtos;
+using EbisuWebApi.Infrastructure.DataModel;
 using FluentValidation;
 using System;
 using System.Collections.Generic;
@@ -6,11 +7,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace EbisuWebApi.Web.Validation
+namespace EbisuWebApi.Domain.Validation
 {
-    public class TransactionDtoValidator : AbstractValidator<TransactionDto>
+    public class TransactionDataModelValidator : AbstractValidator<TransactionDataModel>
     {
-        public TransactionDtoValidator()
+        public TransactionDataModelValidator()
         {
             RuleFor(transaction => transaction.TransactionDate)
                 .LessThanOrEqualTo(DateTime.Now)
@@ -41,6 +42,6 @@ namespace EbisuWebApi.Web.Validation
                .WithMessage("A transaction User is Required");
         }
     }
-    
-    
+
+
 }

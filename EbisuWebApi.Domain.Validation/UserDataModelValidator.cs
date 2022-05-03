@@ -1,24 +1,25 @@
 ﻿using EbisuWebApi.Application.Dtos;
+using EbisuWebApi.Infrastructure.DataModel;
 using FluentValidation;
 
-namespace EbisuWebApi.Web.Validation
+namespace EbisuWebApi.Domain.Validation
 {
-    public class UserDtoValidator : AbstractValidator<UserDto>
+    public class UserDataModelValidator : AbstractValidator<UserDataModel>
     {
-        public UserDtoValidator()
+        public UserDataModelValidator()
         {
             RuleFor(user => user.UserName)
                 .Length(1, 10)
-                .NotEmpty() ;
-            
+                .NotEmpty();
+
             RuleFor(user => user.Email)
                 .EmailAddress()
                 .NotEmpty();
-            
+
             RuleFor(user => user.Password)
                 .NotNull()
                 .NotEmpty()
-                .Length(1, 10);
+                .MinimumLength(8);
         }
     }
 }
