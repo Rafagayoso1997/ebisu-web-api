@@ -11,12 +11,14 @@ namespace EbisuWebApi.Crosscutting.Utils
 {
     public class TokenGenerator
     {
-        public static string CreateToken(int id, string userName)
+        public static string CreateToken(int id, string userName, string email, Role role)
         {
             var claims = new List<Claim>
             {
                 new Claim (ClaimTypes.NameIdentifier, id.ToString()),
-                new Claim (ClaimTypes.Name, userName)
+                new Claim (ClaimTypes.Name, userName),
+                new Claim (ClaimTypes.Email, email),
+                new Claim (ClaimTypes.Role, role.ToString()),
             };
 
             var securityKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(Environment.GetEnvironmentVariable("JWT_SECRET_KEY")));
