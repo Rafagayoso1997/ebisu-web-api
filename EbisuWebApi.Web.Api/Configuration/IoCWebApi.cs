@@ -21,7 +21,7 @@ namespace EbisuWebApi.Web.Api.Configuration
             services.AddTransient<IUserService, UserService>();
             services.AddTransient<ICategoryService, CategoryService>();
             services.AddTransient<ITransactionService, TransactionService>();
-            
+            services.AddCors();
 
             services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
                 .AddJwtBearer(options =>
