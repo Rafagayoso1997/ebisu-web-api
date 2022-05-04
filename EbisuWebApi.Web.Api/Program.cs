@@ -44,6 +44,8 @@ app.UseSwagger();
 app.UseSwaggerUI();
 //}
 
+app.UseCors();
+
 app.UseHttpsRedirection();
 
 app.UseAuthentication();
