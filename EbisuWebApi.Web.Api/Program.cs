@@ -1,8 +1,4 @@
-using EbisuWebApi.Application.Services.Configuration;
-using EbisuWebApi.Application.Services.Contracts;
-using EbisuWebApi.Application.Services.Implementations;
 using EbisuWebApi.Web.Api.Configuration;
-using FluentValidation.AspNetCore;
 using Microsoft.OpenApi.Models;
 using Serilog;
 using Swashbuckle.AspNetCore.Filters;
@@ -13,7 +9,7 @@ var builder = WebApplication.CreateBuilder(args);
 builder.WebHost.UseKestrel(options => options.AddServerHeader = false);
 
 builder.Services.AddControllers();
-builder.Services.ConfigureWebAPILayer(builder.Configuration);
+builder.Services.ConfigureWebAPILayer();
 
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
@@ -30,12 +26,13 @@ builder.Services.AddSwaggerGen(options =>
     options.OperationFilter<SecurityRequirementsOperationFilter>();
 });
 
-builder.Services.AddAutoMapper(typeof(AutoMapperServiceConfiguration));
+
 
 Log.Logger = new LoggerConfiguration()
                             .ReadFrom.Configuration(builder.Configuration)
                             .Enrich.FromLogContext()
                             .CreateLogger();
+
 builder.Host.UseSerilog();
 
 var app = builder.Build();
@@ -43,8 +40,8 @@ var app = builder.Build();
 // Configure the HTTP request pipeline.
 //if (app.Environment.IsDevelopment())
 //{
-    app.UseSwagger();
-    app.UseSwaggerUI();
+app.UseSwagger();
+app.UseSwaggerUI();
 //}
 
 app.UseHttpsRedirection();

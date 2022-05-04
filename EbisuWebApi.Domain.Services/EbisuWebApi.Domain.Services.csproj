@@ -20,6 +20,7 @@
     <ProjectReference Include="..\EbisuWebApi.Application.Dtos\EbisuWebApi.Application.Dtos.csproj" />
     <ProjectReference Include="..\EbisuWebApi.Crosscutting.Exceptions\EbisuWebApi.Crosscutting.Exceptions.csproj" />
     <ProjectReference Include="..\EbisuWebApi.Domain.RepositoryContracts\EbisuWebApi.Domain.RepositoryContracts.csproj" />
+    <ProjectReference Include="..\EbisuWebApi.Domain.Validation\EbisuWebApi.Domain.Validation.csproj" />
     <ProjectReference Include="..\EbisuWebApi.Infrastructure.DataModel\EbisuWebApi.Infrastructure.DataModel.csproj" />
   </ItemGroup>
 

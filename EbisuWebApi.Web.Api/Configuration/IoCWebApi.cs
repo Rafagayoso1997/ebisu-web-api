@@ -15,7 +15,7 @@ namespace EbisuWebApi.Web.Api.Configuration
 {
     public static class IoCWebApi
     {
-        public static IServiceCollection ConfigureWebAPILayer(this IServiceCollection services, IConfiguration configuration)
+        public static IServiceCollection ConfigureWebAPILayer(this IServiceCollection services)
         {
            
             services.AddTransient<IUserService, UserService>();

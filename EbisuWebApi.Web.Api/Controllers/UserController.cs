@@ -42,6 +42,7 @@ namespace EbisuWebApi.Web.Api.Controllers
         }
 
         [HttpGet]
+        [Authorize(Roles ="Admin")]
         public async Task<IActionResult> GetAllUsersAsync()
         {
             try
@@ -56,6 +57,7 @@ namespace EbisuWebApi.Web.Api.Controllers
 
         }
 
+        [Authorize(Roles = "Admin")]
         [HttpGet("{id}")]
         public async Task<IActionResult> GetUserById(int id)
         {
