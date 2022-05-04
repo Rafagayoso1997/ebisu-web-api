@@ -1,4 +1,5 @@
-﻿using EbisuWebApi.Domain.Entities;
+﻿using EbisuWebApi.Crosscutting.Utils;
+using EbisuWebApi.Domain.Entities;
 using EbisuWebApi.Infrastructure.DataModel;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
@@ -21,6 +22,10 @@ namespace VuelingCF.Infrastructure.Repositories.Configurations
             builder.Property(user => user.UserName).IsRequired().HasMaxLength(255);
             builder.Property(user => user.Email).IsRequired().HasMaxLength(255);
             builder.Property(user => user.Password).IsRequired().HasMaxLength(255);
+            builder.Property(user => user.Role).IsRequired()
+                .HasConversion(
+                    v => v.ToString(),
+                    v => (Role)Enum.Parse(typeof(Role), v));
         }
     }
 }

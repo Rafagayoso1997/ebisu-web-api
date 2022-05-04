@@ -17,7 +17,8 @@ namespace EbisuWebApi.Application.Services.Configuration
         public AutoMapperServiceConfiguration()
         {
             CreateMap<UserDto, UserEntity>()
-                .ForMember(dest => dest.Password, opt => opt.MapFrom(src => Encoding.EncryptStringToBytes_Aes(src.Password)));
+                .ForMember(dest => dest.Password, opt => opt.MapFrom(src => Encoding.EncryptStringToBytes_Aes(src.Password)))
+                .ForMember(dest => dest.Role, opt => opt.MapFrom(src => Enum.Parse(typeof(Role), src.Role)));
 
             CreateMap<UserLoginDto, UserEntity>()
                 .ForMember(dest => dest.Password, opt => opt.MapFrom(src => Encoding.EncryptStringToBytes_Aes(src.Password)));
@@ -29,7 +30,7 @@ namespace EbisuWebApi.Application.Services.Configuration
             CreateMap<UserEntity, UserLoginDto>();
 
             CreateMap<UserEntity, UserLoginTokenDto>()
-                .ForMember(dest => dest.Token, opt => opt.MapFrom(src => TokenGenerator.CreateToken(src.UserId,src.UserName)));
+                .ForMember(dest => dest.Token, opt => opt.MapFrom(src => TokenGenerator.CreateToken(src.UserId, src.UserName, src.Email, src.Role)));
 
             CreateMap<CategoryEntity, CategoryDto>();
 
