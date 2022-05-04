@@ -15,7 +15,7 @@ namespace EbisuWebApi.Application.Services.Configuration
         {
 
             services.AddTransient<IUserRepository, UserRepository>();
-            
+            services.AddTransient<IRoleRepository, RoleRepository>();
             services.AddTransient<ICategoryRepository, CategoryRepository>();
             services.AddTransient<ITransactionRepository, TransactionRepository>();
             services.AddTransient<IUnitOfWork, UnitOfWork>();

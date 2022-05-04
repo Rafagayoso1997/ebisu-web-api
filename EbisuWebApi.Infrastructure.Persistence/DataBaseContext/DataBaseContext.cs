@@ -20,6 +20,8 @@ namespace EbisuWebApi.Infrastructure.Persistence.DataBaseContext
 
         public DbSet<TransactionDataModel> Transactions { get; set; }
 
+        public DbSet<RoleDataModel> Roles { get; set; }
+
         protected override void OnModelCreating(ModelBuilder builder)
         {
             builder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly());

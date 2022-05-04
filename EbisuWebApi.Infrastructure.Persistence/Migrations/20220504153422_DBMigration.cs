@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace EbisuWebApi.Infrastructure.Persistence.Migrations
 {
-    public partial class TransactionMigration : Migration
+    public partial class DBMigration : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -32,6 +32,21 @@ namespace EbisuWebApi.Infrastructure.Persistence.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Category", x => x.CategoryId);
+                })
+                .Annotation("MySql:CharSet", "utf8mb4");
+
+            migrationBuilder.CreateTable(
+                name: "Role",
+                columns: table => new
+                {
+                    RoleId = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
+                    RoleType = table.Column<string>(type: "longtext", nullable: false)
+                        .Annotation("MySql:CharSet", "utf8mb4")
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Role", x => x.RoleId);
                 })
                 .Annotation("MySql:CharSet", "utf8mb4");
 
@@ -80,6 +95,31 @@ namespace EbisuWebApi.Infrastructure.Persistence.Migrations
                 .Annotation("MySql:CharSet", "utf8mb4");
 
             migrationBuilder.CreateTable(
+                name: "RoleDataModelUserDataModel",
+                columns: table => new
+                {
+                    RolesRoleId = table.Column<int>(type: "int", nullable: false),
+                    UsersUserId = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_RoleDataModelUserDataModel", x => new { x.RolesRoleId, x.UsersUserId });
+                    table.ForeignKey(
+                        name: "FK_RoleDataModelUserDataModel_Role_RolesRoleId",
+                        column: x => x.RolesRoleId,
+                        principalTable: "Role",
+                        principalColumn: "RoleId",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_RoleDataModelUserDataModel_User_UsersUserId",
+                        column: x => x.UsersUserId,
+                        principalTable: "User",
+                        principalColumn: "UserId",
+                        onDelete: ReferentialAction.Cascade);
+                })
+                .Annotation("MySql:CharSet", "utf8mb4");
+
+            migrationBuilder.CreateTable(
                 name: "Transaction",
                 columns: table => new
                 {
@@ -110,9 +150,33 @@ namespace EbisuWebApi.Infrastructure.Persistence.Migrations
                 })
                 .Annotation("MySql:CharSet", "utf8mb4");
 
+            migrationBuilder.InsertData(
+                table: "Category",
+                columns: new[] { "CategoryId", "Description", "ImageUrl", "IsDefault", "Name", "Type" },
+                values: new object[,]
+                {
+                    { 1, "Comida", "asd", true, "Comida", "Gasto" },
+                    { 2, "Transporte", "asd", true, "Transporte", "Gasto" },
+                    { 3, "Salario", "asd", true, "Salario", "Ingreso" }
+                });
+
+            migrationBuilder.InsertData(
+                table: "Role",
+                columns: new[] { "RoleId", "RoleType" },
+                values: new object[,]
+                {
+                    { 1, "Admin" },
+                    { 2, "User" }
+                });
+
             migrationBuilder.CreateIndex(
                 name: "IX_CategoryDataModelUserDataModel_UsersUserId",
                 table: "CategoryDataModelUserDataModel",
+                column: "UsersUserId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_RoleDataModelUserDataModel_UsersUserId",
+                table: "RoleDataModelUserDataModel",
                 column: "UsersUserId");
 
             migrationBuilder.CreateIndex(
@@ -132,7 +196,13 @@ namespace EbisuWebApi.Infrastructure.Persistence.Migrations
                 name: "CategoryDataModelUserDataModel");
 
             migrationBuilder.DropTable(
+                name: "RoleDataModelUserDataModel");
+
+            migrationBuilder.DropTable(
                 name: "Transaction");
+
+            migrationBuilder.DropTable(
+                name: "Role");
 
             migrationBuilder.DropTable(
                 name: "Category");

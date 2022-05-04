@@ -10,6 +10,8 @@ namespace EbisuWebApi.Domain.RepositoryContracts.Contracts
 
         ITransactionRepository Transactions { get; }
 
+        IRoleRepository Roles { get; }
+
         int Complete();
     }
 }

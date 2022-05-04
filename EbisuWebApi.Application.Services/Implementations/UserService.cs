@@ -2,6 +2,7 @@
 using EbisuWebApi.Application.Dtos;
 using EbisuWebApi.Application.Services.Contracts;
 using EbisuWebApi.Crosscutting.Exceptions;
+using EbisuWebApi.Crosscutting.Utils;
 using EbisuWebApi.Domain.Entities;
 using EbisuWebApi.Domain.RepositoryContracts.Contracts;
 using EbisuWebApi.Domain.Services.Contracts;
@@ -38,9 +39,9 @@ namespace EbisuWebApi.Application.Services.Implementations
             
             await _userDomainService.UserExist(entityDataModel);
 
-            var defaultCategories = await _unitOfWork.Categories.GetDefaultCategories();
+            await _userDomainService.AddDefaultCategoriesToUser(entityDataModel);
 
-            _userDomainService.AddDefaultCategoriesToUser(entityDataModel, defaultCategories);
+            await _userDomainService.AddDefaultRoleToUser(entityDataModel);
 
             var result = await _unitOfWork.Users.Add(entityDataModel);
             _unitOfWork.Complete();
@@ -66,11 +67,17 @@ namespace EbisuWebApi.Application.Services.Implementations
         {
             UserDataModel entityDataModel = _mapper.Map<UserDataModel>(_mapper.Map<UserEntity>(userDTO));
 
-            UserLoginTokenDto userLoginTokenDto = _mapper.Map<UserLoginTokenDto>(_mapper.Map<UserEntity>(await _unitOfWork.Users.Login(entityDataModel)));
+            var  logedUser = await _unitOfWork.Users.Login(entityDataModel);
 
-            if (userLoginTokenDto == null) throw new IncorrectCredentials();
+            if (logedUser == null) throw new IncorrectCredentials();
 
-            return userLoginTokenDto;
+            List<string> roles = logedUser.Roles.Select(x => x.RoleType.ToString()).ToList();
+
+            var token = TokenGenerator.CreateToken(logedUser.UserId, logedUser.UserName, logedUser.Email, roles);
+
+            return new UserLoginTokenDto { 
+                    Token = token,
+                };
         }
 
         public async Task<UserDto> RemoveUser(int id)
