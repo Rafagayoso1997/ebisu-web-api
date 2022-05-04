@@ -13,14 +13,18 @@ namespace EbisuWebApi.Infrastructure.Repositories.Implementations
 
         public ITransactionRepository Transactions { get; }
 
+        public IRoleRepository Roles { get; }
+
         public UnitOfWork(DatabaseContext context,
-            IUserRepository userRepository, ICategoryRepository categoryRepository, ITransactionRepository transactionRepository)
+            IUserRepository userRepository, ICategoryRepository categoryRepository, ITransactionRepository transactionRepository, IRoleRepository roles)
         {
             _context = context;
 
             Users = userRepository;
             Categories = categoryRepository;
             Transactions = transactionRepository;
+            Roles = roles;
+
         }
         public int Complete()
         {

@@ -11,15 +11,19 @@ namespace EbisuWebApi.Crosscutting.Utils
 {
     public class TokenGenerator
     {
-        public static string CreateToken(int id, string userName, string email, Role role)
+        public static string CreateToken(int id, string userName, string email, List<string> roles)
         {
             var claims = new List<Claim>
             {
                 new Claim (ClaimTypes.NameIdentifier, id.ToString()),
                 new Claim (ClaimTypes.Name, userName),
-                new Claim (ClaimTypes.Email, email),
-                new Claim (ClaimTypes.Role, role.ToString()),
+                new Claim (ClaimTypes.Email, email)
             };
+
+            foreach (var role in roles)
+            {
+                claims.Add(new Claim(ClaimTypes.Role, role));
+            }
 
             var securityKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(Environment.GetEnvironmentVariable("JWT_SECRET_KEY")));
             var expireTime = Convert.ToInt32(Environment.GetEnvironmentVariable("JWT_EXPIRE_MINUTES"));

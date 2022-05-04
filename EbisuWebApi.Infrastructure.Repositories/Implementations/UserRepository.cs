@@ -19,7 +19,7 @@ namespace EbisuWebApi.Infrastructure.Repositories.Implementations
 
         public async Task<UserDataModel> Login(UserDataModel userDataModel)
         {
-            return await _context.Users.FirstOrDefaultAsync(user => user.UserName.ToLower().Equals(userDataModel.UserName.ToLower())
+            return await _context.Users.Include(user => user.Roles).FirstOrDefaultAsync(user => user.UserName.ToLower().Equals(userDataModel.UserName.ToLower())
             &&  user.Password.ToLower().Equals(userDataModel.Password.ToLower()));
         }
 

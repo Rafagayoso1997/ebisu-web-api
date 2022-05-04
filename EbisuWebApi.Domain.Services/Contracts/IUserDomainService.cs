@@ -10,8 +10,10 @@ namespace EbisuWebApi.Domain.Services.Contracts
 {
     public interface IUserDomainService
     {
-        void AddDefaultCategoriesToUser(UserDataModel userDataModel, IEnumerable<CategoryDataModel> defaultCategories);
-        
+        Task AddDefaultCategoriesToUser(UserDataModel userDataModel);
+
+        Task AddDefaultRoleToUser(UserDataModel userDataModel);
+
         Task ValidateUserData(UserDataModel userDataModel);
 
         Task UserExist(UserDataModel userDataModel);

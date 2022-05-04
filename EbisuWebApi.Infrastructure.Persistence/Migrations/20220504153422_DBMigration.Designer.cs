@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace EbisuWebApi.Infrastructure.Persistence.Migrations
 {
     [DbContext(typeof(DatabaseContext))]
-    [Migration("20220504080019_AddRoleUserMigration")]
-    partial class AddRoleUserMigration
+    [Migration("20220504153422_DBMigration")]
+    partial class DBMigration
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -100,6 +100,34 @@ namespace EbisuWebApi.Infrastructure.Persistence.Migrations
                         });
                 });
 
+            modelBuilder.Entity("EbisuWebApi.Infrastructure.DataModel.RoleDataModel", b =>
+                {
+                    b.Property<int>("RoleId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("RoleType")
+                        .IsRequired()
+                        .HasColumnType("longtext");
+
+                    b.HasKey("RoleId");
+
+                    b.ToTable("Role", (string)null);
+
+                    b.HasData(
+                        new
+                        {
+                            RoleId = 1,
+                            RoleType = "Admin"
+                        },
+                        new
+                        {
+                            RoleId = 2,
+                            RoleType = "User"
+                        });
+                });
+
             modelBuilder.Entity("EbisuWebApi.Infrastructure.DataModel.TransactionDataModel", b =>
                 {
                     b.Property<int>("TransactionId")
@@ -150,10 +178,6 @@ namespace EbisuWebApi.Infrastructure.Persistence.Migrations
                         .HasMaxLength(255)
                         .HasColumnType("varchar(255)");
 
-                    b.Property<string>("Role")
-                        .IsRequired()
-                        .HasColumnType("longtext");
-
                     b.Property<string>("UserName")
                         .IsRequired()
                         .HasMaxLength(255)
@@ -162,6 +186,21 @@ namespace EbisuWebApi.Infrastructure.Persistence.Migrations
                     b.HasKey("UserId");
 
                     b.ToTable("User", (string)null);
+                });
+
+            modelBuilder.Entity("RoleDataModelUserDataModel", b =>
+                {
+                    b.Property<int>("RolesRoleId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("UsersUserId")
+                        .HasColumnType("int");
+
+                    b.HasKey("RolesRoleId", "UsersUserId");
+
+                    b.HasIndex("UsersUserId");
+
+                    b.ToTable("RoleDataModelUserDataModel");
                 });
 
             modelBuilder.Entity("CategoryDataModelUserDataModel", b =>
@@ -196,6 +235,21 @@ namespace EbisuWebApi.Infrastructure.Persistence.Migrations
                     b.Navigation("Category");
 
                     b.Navigation("User");
+                });
+
+            modelBuilder.Entity("RoleDataModelUserDataModel", b =>
+                {
+                    b.HasOne("EbisuWebApi.Infrastructure.DataModel.RoleDataModel", null)
+                        .WithMany()
+                        .HasForeignKey("RolesRoleId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("EbisuWebApi.Infrastructure.DataModel.UserDataModel", null)
+                        .WithMany()
+                        .HasForeignKey("UsersUserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 #pragma warning restore 612, 618
         }

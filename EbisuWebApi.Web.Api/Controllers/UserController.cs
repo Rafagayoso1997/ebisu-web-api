@@ -30,7 +30,7 @@ namespace EbisuWebApi.Web.Api.Controllers
         {
             try
             {
-               
+
                 return Ok(await _userService.AddUserAsync(userDto)); 
             }
             catch (ModelValidationException ex)

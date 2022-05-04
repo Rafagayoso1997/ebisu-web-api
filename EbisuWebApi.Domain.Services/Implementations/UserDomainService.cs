@@ -28,12 +28,20 @@ namespace EbisuWebApi.Domain.Services.Implementations
             _logger = logger;
         }
 
-        public void AddDefaultCategoriesToUser(UserDataModel userDataModel, IEnumerable<CategoryDataModel> defaultCategories)
+        public async Task AddDefaultCategoriesToUser(UserDataModel userDataModel)
         {
+            var defaultCategories = await _unitOfWork.Categories.GetDefaultCategories();
             userDataModel.Categories = new List<CategoryDataModel>();
             userDataModel.Categories.AddRangeToCollection(defaultCategories);
         }
-        
+
+        public async Task AddDefaultRoleToUser(UserDataModel userDataModel)
+        {
+            var userRole = await _unitOfWork.Roles.GetUserRole();
+            userDataModel.Roles = new List<RoleDataModel>();
+            userDataModel.Roles.Add(userRole);
+        }
+
         public async Task UserExist(UserDataModel userDataModel)
         {
             bool userExist = await _unitOfWork.Users.UserExist(userDataModel.UserName);
