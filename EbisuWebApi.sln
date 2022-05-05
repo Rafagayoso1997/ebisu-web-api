@@ -39,7 +39,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EbisuWebApi.Crosscutting.Ut
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EbisuWebApi.Crosscutting.Exceptions", "EbisuWebApi.Crosscutting.Exceptions\EbisuWebApi.Crosscutting.Exceptions.csproj", "{29F72629-EFB4-4881-B076-04AFC35FCF8C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EbisuWebApi.Domain.Validation", "EbisuWebApi.Domain.Validation\EbisuWebApi.Domain.Validation.csproj", "{93DFF3F4-7EDD-4E66-83DA-481F48D3DFAD}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EbisuWebApi.Domain.Validation", "EbisuWebApi.Domain.Validation\EbisuWebApi.Domain.Validation.csproj", "{93DFF3F4-7EDD-4E66-83DA-481F48D3DFAD}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
