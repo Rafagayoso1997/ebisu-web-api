@@ -44,7 +44,7 @@ namespace EbisuWebApi.Application.Services.Implementations.Unit.Tests
                  ReturnsAsync(UserFixtures.GetUserDataModel());
 
             _mockUnitOfWork.Setup(unit => unit.Users.Update(It.IsAny<UserDataModel>())).
-                ReturnsAsync(UserFixtures.GetUserDataModel());
+                ReturnsAsync(It.IsAny<UserDataModel>());
 
             _mockMapper = AutoMapperFixtures.SetupAutoMapperMock();
 
@@ -56,7 +56,15 @@ namespace EbisuWebApi.Application.Services.Implementations.Unit.Tests
         [TestMethod()]
         public async Task AddUserAsyncTest()
         {
-            UserDto user = await _userService.AddUserAsync(UserFixtures.GetUserDto());
+            UserDto userToInsert = new UserDto
+            {
+                UserId = 1,
+                UserName = "Rafa",
+                Password = "123456",
+                Email = "gayoso0597@gmail.com"
+            };
+
+            UserDto user = await _userService.AddUserAsync(userToInsert);
 
             _mockUnitOfWork.Verify(unit => unit.Users.Add(It.IsAny<UserDataModel>()), Times.Once);
             
