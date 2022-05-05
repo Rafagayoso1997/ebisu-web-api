@@ -63,7 +63,7 @@ namespace EbisuWebApi.Application.Services.Implementations
             //_unitOfWork.Complete();
         }
 
-        public async Task<UserLoginTokenDto> LoginUser(UserLoginDto userDTO)
+        public async Task<TokenDto> LoginUser(UserLoginDto userDTO)
         {
             UserDataModel entityDataModel = _mapper.Map<UserDataModel>(_mapper.Map<UserEntity>(userDTO));
 
@@ -75,7 +75,7 @@ namespace EbisuWebApi.Application.Services.Implementations
 
             var token = TokenGenerator.CreateToken(logedUser.UserId, logedUser.UserName, logedUser.Email, roles);
 
-            return new UserLoginTokenDto { 
+            return new TokenDto { 
                     Token = token,
                 };
         }

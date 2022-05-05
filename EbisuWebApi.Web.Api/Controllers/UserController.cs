@@ -79,7 +79,9 @@ namespace EbisuWebApi.Web.Api.Controllers
             try
             {
                 _logger.LogInformation(userDTO.UserName);
-                return Ok(await _userService.LoginUser(userDTO));
+                TokenDto token = await _userService.LoginUser(userDTO);
+                HttpContext.Session.SetString("Token", token.Token);
+                return Ok(token);
             }
             catch (Exception ex)
             {

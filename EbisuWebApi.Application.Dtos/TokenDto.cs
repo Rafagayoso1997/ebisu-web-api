@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace EbisuWebApi.Application.Dtos
 {
-    public class UserLoginTokenDto
+    public class TokenDto
     {
         public string Token { get; set; }
     }
