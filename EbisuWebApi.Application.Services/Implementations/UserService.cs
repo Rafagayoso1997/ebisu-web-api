@@ -73,6 +73,7 @@ namespace EbisuWebApi.Application.Services.Implementations
 
             List<string> roles = logedUser.Roles.Select(x => x.RoleType.ToString()).ToList();
 
+            
             var token = TokenGenerator.CreateToken(logedUser.UserId, logedUser.UserName, logedUser.Email, roles);
 
             return new TokenDto { 

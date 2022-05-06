@@ -15,7 +15,7 @@ namespace EbisuWebApi.Web.Api.Configuration
 {
     public static class IoCWebApi
     {
-        public static IServiceCollection ConfigureWebAPILayer(this IServiceCollection services)
+        public static IServiceCollection ConfigureWebAPILayer(this IServiceCollection services, IConfiguration configuration)
         {
            
             services.AddTransient<IUserService, UserService>();
@@ -31,7 +31,7 @@ namespace EbisuWebApi.Web.Api.Configuration
                         ValidateIssuer = false,
                         ValidateIssuerSigningKey = true,
                         ValidateAudience = false,
-                        IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(Environment.GetEnvironmentVariable("JWT_SECRET_KEY")))
+                        IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(configuration.GetValue<string>("JWTValues:SecretKey")))
                     };
                 });
 
