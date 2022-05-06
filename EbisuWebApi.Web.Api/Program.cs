@@ -1,4 +1,5 @@
 using EbisuWebApi.Web.Api.Configuration;
+using EbisuWebApi.Web.Api.ExceptionMiddleware;
 using Microsoft.OpenApi.Models;
 using Serilog;
 using Swashbuckle.AspNetCore.Filters;
@@ -53,6 +54,8 @@ app.UseCors(x => x
 app.UseHttpsRedirection();
 
 app.UseAuthentication();
+
+app.UseMiddleware<ErrorHandlerMiddleware>();
 
 app.UseAuthorization();
 

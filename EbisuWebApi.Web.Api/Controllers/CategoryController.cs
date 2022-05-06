@@ -23,44 +23,26 @@ namespace EbisuWebApi.Web.Api.Controllers
         [HttpPost]
         public async Task<IActionResult> SaveCategoryAsync(CategoryDto categoryDto)
         {
-            try
-            {
-                return Ok(await _categoryService.AddCategoryAsync(categoryDto));
-            }
-            catch (Exception ex)
-            {
 
-                return BadRequest(ex.Message);
-            }
+            return Ok(await _categoryService.AddCategoryAsync(categoryDto));
 
         }
+
 
         [HttpGet]
         public async Task<IActionResult> GetAllUsersAsync()
         {
-            try
-            {
-                return Ok(await _categoryService.GetAll());
-            }
-            catch (Exception ex)
-            {
 
-                return BadRequest(ex.Message);
-            }
+            return Ok(await _categoryService.GetAll());
 
         }
 
         [HttpGet("{id}")]
         public async Task<IActionResult> GetCategoryById(int id)
         {
-            try
-            {
-                return Ok(await _categoryService.GetById(id));
-            }
-            catch (Exception ex)
-            {
-                return BadRequest(ex.Message);
-            }
+
+            return Ok(await _categoryService.GetById(id));
+
 
         }
 
@@ -68,29 +50,19 @@ namespace EbisuWebApi.Web.Api.Controllers
         [HttpPut]
         public async Task<IActionResult> PutAsync(CategoryDto categoryDto)
         {
-            try
-            {
-               
-                return Ok(await _categoryService.UpdateCategory(categoryDto));
-            }
-            catch (Exception ex)
-            {
-                return BadRequest(ex.Message);
-            }
+
+
+            return Ok(await _categoryService.UpdateCategory(categoryDto));
+
         }
 
         // DELETE api/<InvoiceController>/5
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteAsync(int id)
         {
-            try
-            {
-                return Ok(await _categoryService.RemoveCategory(id));
-            }
-            catch (Exception ex)
-            {
-                return BadRequest(ex.Message);
-            }
+
+            return Ok(await _categoryService.RemoveCategory(id));
+
         }
 
     }

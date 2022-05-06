@@ -56,7 +56,7 @@ namespace EbisuWebApi.Domain.Services.Implementations
             {
                 StringBuilder sb = new StringBuilder();
                 validatorResult.Errors.ForEach(error => sb.AppendLine(error.ErrorMessage));
-                _logger.LogError(sb.ToString());
+               // _logger.LogError(sb.ToString());
                 throw new ModelValidationException(sb.ToString());
             }
         }

@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace EbisuWebApi.Crosscutting.Exceptions
 {
-    public class IncorrectCredentials : Exception
+    public class IncorrectCredentials : EbisuException
     {
         public IncorrectCredentials() : base(MessagesResource.UsernameAndPasswordIncorrect)
         {

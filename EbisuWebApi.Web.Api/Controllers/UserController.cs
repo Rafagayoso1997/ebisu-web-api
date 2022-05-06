@@ -22,99 +22,60 @@ namespace EbisuWebApi.Web.Api.Controllers
             _userService = userService;
             _logger = logger;
         }
-       
+
 
         [AllowAnonymous]
         [HttpPost]
         public async Task<IActionResult> RegisterUserAsync(UserDto userDto)
         {
-            try
-            {
 
-                return Ok(await _userService.AddUserAsync(userDto)); 
-            }
-            catch (ModelValidationException ex)
-            {
-
-                return BadRequest(ex.Message);
-            }
+            return Ok(await _userService.AddUserAsync(userDto));
 
         }
 
         [HttpGet]
-        [Authorize(Roles ="Admin")]
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> GetAllUsersAsync()
         {
-            try
-            {
-                return Ok(await _userService.GetAll());
-            }
-            catch (Exception ex)
-            {
-
-                return BadRequest(ex.Message);
-            }
-
+            return Ok(await _userService.GetAll());
         }
 
         [Authorize(Roles = "Admin")]
         [HttpGet("{id}")]
         public async Task<IActionResult> GetUserById(int id)
         {
-            try
-            {
-                return Ok(await _userService.GetById(id));
-            }
-            catch (Exception ex)
-            {
-                return BadRequest(ex.Message);
-            }
+            return Ok(await _userService.GetById(id));
 
         }
-        
+
         [AllowAnonymous]
         [HttpPost("Login")]
         public async Task<IActionResult> LoginUser(UserLoginDto userDTO)
         {
-            try
-            {
-                _logger.LogInformation(userDTO.UserName);
-                TokenDto token = await _userService.LoginUser(userDTO);
-                HttpContext.Session.SetString("Token", token.Token);
-                return Ok(token);
-            }
-            catch (Exception ex)
-            {
-                return BadRequest(ex.Message);
-            }
+
+            _logger.LogInformation(userDTO.UserName);
+            TokenDto token = await _userService.LoginUser(userDTO);
+            HttpContext.Session.SetString("Token", token.Token);
+            return Ok(token);
+
         }
 
         // PUT api/<InvoiceController>/5
         [HttpPut]
         public async Task<IActionResult> PutAsync(UserDto userDto)
         {
-            try
-            {
-                return Ok(await _userService.UpdateUser(userDto));
-            }
-            catch (Exception ex)
-            {
-                return BadRequest(ex.Message);
-            }
+
+            return Ok(await _userService.UpdateUser(userDto));
+
         }
 
         // DELETE api/<InvoiceController>/5
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteAsync(int id)
         {
-            try
-            {
-                return Ok(await _userService.RemoveUser(id));
-            }
-            catch (Exception ex)
-            {
-                return BadRequest(ex.Message);
-            }
+
+            return Ok(await _userService.RemoveUser(id));
+
         }
 
     }

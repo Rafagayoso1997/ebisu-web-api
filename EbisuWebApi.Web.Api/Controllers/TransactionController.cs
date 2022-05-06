@@ -20,94 +20,60 @@ namespace EbisuWebApi.Web.Api.Controllers
         public TransactionController(ITransactionService transactionService)
         {
             _transactionService = transactionService;
-           
-        }
 
+        }
 
         [HttpPost]
         public async Task<IActionResult> SaveTransactionAsync(TransactionDto transactionDTO)
         {
-            try
-            {
-                return Ok(await _transactionService.AddTransactionAsync(transactionDTO));
-            }
-            catch (Exception ex)
-            {
 
-                return BadRequest(ex.Message);
-            }
+            return Ok(await _transactionService.AddTransactionAsync(transactionDTO));
 
         }
 
         [HttpGet]
         public async Task<IActionResult> GetAllTansactionsAsync()
         {
-            try
-            {
-                return Ok(await _transactionService.GetAllTransactions());
-            }
-            catch (Exception ex)
-            {
 
-                return BadRequest(ex.Message);
-            }
+            return Ok(await _transactionService.GetAllTransactions());
+
 
         }
 
         [HttpGet("GetById/{id}")]
         public async Task<IActionResult> GetTransactionById(int id)
         {
-            try
-            {
-                return Ok(await _transactionService.GeTransactionById(id));
-            }
-            catch (Exception ex)
-            {
-                return BadRequest(ex.Message);
-            }
+
+            return Ok(await _transactionService.GeTransactionById(id));
+
 
         }
 
         [HttpGet("GetByUser")]
         public async Task<IActionResult> GetTransactionByUserId()
         {
-            try
-            {
-                int userId = int.Parse(User.Claims.FirstOrDefault(claim => claim.Type == ClaimTypes.NameIdentifier).Value);
-                return Ok(await _transactionService.GetAllTransactionsByUserId(userId));
-            }
-            catch (Exception ex)
-            {
-                return BadRequest(ex.Message);
-            }
+
+            int userId = int.Parse(User.Claims.FirstOrDefault(claim => claim.Type == ClaimTypes.NameIdentifier).Value);
+            return Ok(await _transactionService.GetAllTransactionsByUserId(userId));
+
 
         }
 
         [HttpPut]
         public async Task<IActionResult> UpdateTransaction(TransactionDto transactionDTO)
         {
-            try
-            {
-                return Ok(await _transactionService.UpdateTransaction(transactionDTO));
-            }
-            catch (Exception ex)
-            {
-                return BadRequest(ex.Message);
-            }
+
+            return Ok(await _transactionService.UpdateTransaction(transactionDTO));
+
         }
 
 
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteTransactionAsync(int id)
         {
-            try
-            {
-                return Ok(await _transactionService.RemoveTransaction(id));
-            }
-            catch (Exception ex)
-            {
-                return BadRequest(ex.Message);
-            }
+
+            return Ok(await _transactionService.RemoveTransaction(id));
+
         }
     }
 }
