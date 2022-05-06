@@ -37,6 +37,15 @@ namespace EbisuWebApi.Web.Api.Controllers
         [Authorize(Roles = "Admin")]
         public async Task<IActionResult> GetAllUsersAsync()
         {
+            try
+            {
+                var list = await _userService.GetAll();
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex.Message);
+            }
+            
             return Ok(await _userService.GetAll());
         }
 
@@ -55,7 +64,7 @@ namespace EbisuWebApi.Web.Api.Controllers
 
             _logger.LogInformation(userDTO.UserName);
             TokenDto token = await _userService.LoginUser(userDTO);
-            HttpContext.Session.SetString("Token", token.Token);
+            //HttpContext.Session.SetString("Token", token.Token);
             return Ok(token);
 
         }

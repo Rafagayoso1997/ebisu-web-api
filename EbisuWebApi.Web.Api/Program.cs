@@ -1,3 +1,4 @@
+using EbisuWebApi.Crosscutting.Utils;
 using EbisuWebApi.Web.Api.Configuration;
 using EbisuWebApi.Web.Api.ExceptionMiddleware;
 using Microsoft.OpenApi.Models;
@@ -10,7 +11,8 @@ var builder = WebApplication.CreateBuilder(args);
 builder.WebHost.UseKestrel(options => options.AddServerHeader = false);
 
 builder.Services.AddControllers();
-builder.Services.ConfigureWebAPILayer();
+builder.Services.ConfigureWebAPILayer(builder.Configuration);
+
 
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
@@ -62,3 +64,6 @@ app.UseAuthorization();
 app.MapControllers();
 
 app.Run();
+
+
+public partial class Program { }

@@ -32,7 +32,7 @@ namespace EbisuWebApi.Crosscutting.Utils
             var tokenDescriptor = new SecurityTokenDescriptor
             {
                 Subject = new ClaimsIdentity(claims),
-                Expires = DateTime.UtcNow.AddMinutes(Convert.ToInt32(expireTime)),
+                Expires = DateTime.UtcNow.AddDays(7),
                 SigningCredentials = signingCredentials
             };
 
