@@ -9,12 +9,5 @@
                             $"Uid={Environment.GetEnvironmentVariable("USER_NAME")};" +
                             $"Pwd={Environment.GetEnvironmentVariable("PASSWORD_DB")};";
         } 
-
-        public static string DefaultConnection()
-        {
-            return "Server=localhost;Database=Ebisu;Uid=root;Pwd=ebisu2022.;";
-        }
-          
-
     }
 }

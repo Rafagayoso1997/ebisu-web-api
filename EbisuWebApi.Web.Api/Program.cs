@@ -31,12 +31,14 @@ builder.Services.AddSwaggerGen(options =>
 
 
 
-Log.Logger = new LoggerConfiguration()
-                            .ReadFrom.Configuration(builder.Configuration)
-                            .Enrich.FromLogContext()
-                            .CreateLogger();
+//Log.Logger = new LoggerConfiguration()
+  //                          .ReadFrom.Configuration(builder.Configuration)
+    //                        .Enrich.FromLogContext()
+      //                      .CreateLogger();
 
-builder.Host.UseSerilog();
+builder.Host.UseSerilog( (context, configuration) =>
+    configuration.ReadFrom.Configuration(context.Configuration)
+);
 
 var app = builder.Build();
 

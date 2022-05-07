@@ -24,8 +24,8 @@ namespace EbisuWebApi.Application.Services.Configuration
 
             services.AddDbContext<DatabaseContext>(options =>
             {
-                var serverVersion = new MySqlServerVersion(new Version(5, 6, 50));
-                options.UseMySql(connectionString, serverVersion);
+                //var serverVersion = new MySqlServerVersion(new Version(5, 6, 50));
+                options.UseMySql(connectionString, ServerVersion.AutoDetect(connectionString));
             });
             services.BuildServiceProvider().GetService<DatabaseContext>().Database.MigrateAsync();
 

@@ -19,11 +19,15 @@ namespace EbisuWebApi.Integration.UserServiceTest
         {
             builder.ConfigureServices(services =>
             {
+                var descriptor = services.SingleOrDefault(
+                   d => d.ServiceType ==
+                       typeof(DbContextOptions<DatabaseContext>));
+                if (descriptor != null)
+                    services.Remove(descriptor);
 
                 services.AddDbContext<DatabaseContext>(options =>
                 {
-                    var serverVersion = new MySqlServerVersion(new Version(5, 6, 50));
-                    options.UseMySql(connectionString, serverVersion);
+                    options.UseMySql(connectionString, ServerVersion.AutoDetect(connectionString));
                 });
 
                 var sp = services.BuildServiceProvider();

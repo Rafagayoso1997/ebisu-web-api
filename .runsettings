@@ -1,0 +1,14 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!-- File name extension must be .runsettings -->
+<RunSettings>
+	<RunConfiguration>
+		<EnvironmentVariables>
+			<!-- List of environment variables we want to set-->
+			<DATABASE>EbisuTest</DATABASE>
+			<HOST>localhost</HOST>
+			<PASSWORD_DB>ebisu2022.</PASSWORD_DB>
+			<USER_NAME>root</USER_NAME>
+			<JWT_SECRET_KEY>pn@CReNLL%CAJN7#sLS2</JWT_SECRET_KEY>
+		</EnvironmentVariables>
+	</RunConfiguration>
+</RunSettings>
