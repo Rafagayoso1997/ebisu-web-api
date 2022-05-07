@@ -11,6 +11,7 @@ env:
   DATABASE: ${{secrets.DATABASE}}
   USER_NAME: ${{secrets.USER_NAME}}
   PASSWORD_DB: ${{secrets.PASSWORD_DB}}
+  JWT_SECRET_KEY: ${{ secrets.JWT_SECRET_KEY }}
 
 jobs:
   build:
@@ -37,8 +38,6 @@ jobs:
     - name: Build
       run: dotnet build --no-restore
     - name: Test
-      env: # Set the secret as an input
-        JWT_SECRET_KEY: ${{ secrets.JWT_SECRET_KEY }}
       run: dotnet test --no-build --verbosity normal
      
       
