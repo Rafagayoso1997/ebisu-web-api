@@ -37,4 +37,6 @@ jobs:
     - name: Build
       run: dotnet build --no-restore
     - name: Test
+      with: # Set the secret as an input
+        super_secret: ${{ secrets.JWT_SECRET_KEY }}
       run: dotnet test --no-build --verbosity normal
