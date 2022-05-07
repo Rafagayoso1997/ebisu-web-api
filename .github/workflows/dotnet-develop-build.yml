@@ -5,6 +5,12 @@ on:
     branches: [ develop ]
   pull_request:
     branches: [ develop ]
+    
+env:
+  HOST: ${{secrets.HOST}}
+  DATABASE: ${{secrets.DATABASE}}
+  USER_NAME: ${{secrets.USER_NAME}}
+  PASSWORD_DB: ${{secrets.PASSWORD_DB}}
 
 jobs:
   build:
