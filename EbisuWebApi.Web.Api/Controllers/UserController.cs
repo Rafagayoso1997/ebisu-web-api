@@ -28,24 +28,13 @@ namespace EbisuWebApi.Web.Api.Controllers
         [HttpPost]
         public async Task<IActionResult> RegisterUserAsync(UserDto userDto)
         {
-
             return Ok(await _userService.AddUserAsync(userDto));
-
         }
 
         [HttpGet]
         [Authorize(Roles = "Admin")]
         public async Task<IActionResult> GetAllUsersAsync()
         {
-            try
-            {
-                var list = await _userService.GetAll();
-            }
-            catch (Exception ex)
-            {
-                _logger.LogError(ex.Message);
-            }
-            
             return Ok(await _userService.GetAll());
         }
 
@@ -54,7 +43,6 @@ namespace EbisuWebApi.Web.Api.Controllers
         public async Task<IActionResult> GetUserById(int id)
         {
             return Ok(await _userService.GetById(id));
-
         }
 
         [AllowAnonymous]
@@ -64,7 +52,6 @@ namespace EbisuWebApi.Web.Api.Controllers
 
             _logger.LogInformation(userDTO.UserName);
             TokenDto token = await _userService.LoginUser(userDTO);
-            //HttpContext.Session.SetString("Token", token.Token);
             return Ok(token);
 
         }
