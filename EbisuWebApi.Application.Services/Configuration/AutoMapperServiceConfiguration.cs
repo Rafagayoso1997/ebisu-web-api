@@ -8,7 +8,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Encoding = EbisuWebApi.Crosscutting.Security.Encoding;
+using EncodingAes = EbisuWebApi.Crosscutting.Security.EncodingAes;
 
 namespace EbisuWebApi.Application.Services.Configuration
 {
@@ -17,10 +17,10 @@ namespace EbisuWebApi.Application.Services.Configuration
         public AutoMapperServiceConfiguration()
         {
             CreateMap<UserDto, UserEntity>()
-                .ForMember(dest => dest.Password, opt => opt.MapFrom(src => Encoding.EncryptStringToBytes_Aes(src.Password)));
+                .ForMember(dest => dest.Password, opt => opt.MapFrom(src => EncodingAes.EncryptStringToBytes_Aes(src.Password)));
 
             CreateMap<UserLoginDto, UserEntity>()
-                .ForMember(dest => dest.Password, opt => opt.MapFrom(src => Encoding.EncryptStringToBytes_Aes(src.Password)));
+                .ForMember(dest => dest.Password, opt => opt.MapFrom(src => EncodingAes.EncryptStringToBytes_Aes(src.Password)));
 
             CreateMap<CategoryDto, CategoryEntity>()
                 .ForMember(dest => dest.Type, opt => opt.MapFrom(src => Enum.Parse(typeof(CategoryType), src.Type)));

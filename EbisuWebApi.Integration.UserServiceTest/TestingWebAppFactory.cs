@@ -27,7 +27,7 @@ namespace EbisuWebApi.Integration.UserServiceTest
 
                 services.AddDbContext<DatabaseContext>(options =>
                 {
-                    options.UseInMemoryDatabase("EbisuTest");
+                    options.UseMySql(connectionString, ServerVersion.AutoDetect(connectionString));
                 });
 
                 var sp = services.BuildServiceProvider();

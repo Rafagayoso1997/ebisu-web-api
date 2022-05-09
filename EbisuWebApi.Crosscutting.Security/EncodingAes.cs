@@ -4,7 +4,7 @@ using System.Text;
 
 namespace EbisuWebApi.Crosscutting.Security
 {
-    public static class Encoding
+    public static class EncodingAes
     {
 
         private static byte[] ConvertStringIntoByteArray(string stringToConvert)

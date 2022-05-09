@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 namespace EbisuWebApi.Infrastructure.IntegrationTests
 {
     [TestClass]
-    public class UserRepositoryIntegrationTests : BaseIntegrationTests
+    public class UserMySqlRepositoryIntegrationTests : BaseMySqlIntegrationTests
     {
         [TestMethod]
         public async Task AddAsync_HappyPath()
@@ -29,6 +29,7 @@ namespace EbisuWebApi.Infrastructure.IntegrationTests
 
             Assert.IsTrue(await userRepository.UserExist(userDataModel.UserName));
         }
+        
         [TestMethod]
         public async Task Userexists_HappyPath()
         {
@@ -58,7 +59,6 @@ namespace EbisuWebApi.Infrastructure.IntegrationTests
 
             Assert.IsFalse(actual);
         }
-
 
         [TestMethod]
         public async Task Delete_Happypath()
@@ -110,7 +110,7 @@ namespace EbisuWebApi.Infrastructure.IntegrationTests
                     Password = "123"
                 }
             };
-
+            
             foreach (var userDataModel in userDataModels)
             {
                 await userRepository.Add(userDataModel);
@@ -193,11 +193,5 @@ namespace EbisuWebApi.Infrastructure.IntegrationTests
             Assert.AreEqual(userToFind, actual);
 
         }
-
-
-
-
-
-
     }
 }

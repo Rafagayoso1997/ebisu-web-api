@@ -1,6 +1,8 @@
-﻿using EbisuWebApi.Crosscutting.ResourcesManagement;
+﻿
+using EbisuWebApi.Crosscutting.ResourcesManagement;
 using EbisuWebApi.Infrastructure.Persistence.DataBaseContext;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Diagnostics;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,10 +17,22 @@ namespace EbisuWebApi.Infrastructure.IntegrationTests.TestTools
 
         public static DatabaseContext CreateTestDatabase()
         {
-            var serverVersion = new MySqlServerVersion(new Version(5, 6, 50));
-            var options = new DbContextOptionsBuilder<DatabaseContext>().UseMySql(_connectionString, serverVersion).Options;
+            var options = new DbContextOptionsBuilder<DatabaseContext>().UseMySql(_connectionString, ServerVersion.AutoDetect(_connectionString)).Options;
             var dbcontext = new DatabaseContext(options);
             dbcontext.Database.Migrate();
+            //TODO: añadir seeds
+
+            return dbcontext;
+        }
+
+        public static DatabaseContext CreateInMemoryDatabase()
+        {
+            var options = new DbContextOptionsBuilder<DatabaseContext>().
+                UseInMemoryDatabase("EbisuTest")
+                .ConfigureWarnings(b => b.Ignore(InMemoryEventId.TransactionIgnoredWarning))
+                .Options;
+            var dbcontext = new DatabaseContext(options);
+            //dbcontext.Database.Migrate();
             //TODO: añadir seeds
 
             return dbcontext;
