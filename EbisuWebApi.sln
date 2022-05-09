@@ -49,8 +49,6 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EbisuWebApi.Integration.Use
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EbisuWebApi.Infrastructure.IntegrationTests", "EbisuWebApi.Infrastructure.IntegrationTests\EbisuWebApi.Infrastructure.IntegrationTests.csproj", "{0449365C-6B29-48EF-8DAC-D4E2E3E42ED7}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EbisuWebApi.Crosscutting.Middleware", "EbisuWebApi.Crosscutting.Middleware\EbisuWebApi.Crosscutting.Middleware.csproj", "{8C340B95-4197-4C75-8A4A-BB536D60495B}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
