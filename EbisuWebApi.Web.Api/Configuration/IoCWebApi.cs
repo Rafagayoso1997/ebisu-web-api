@@ -31,8 +31,8 @@ namespace EbisuWebApi.Web.Api.Configuration
                         ValidateIssuer = false,
                         ValidateIssuerSigningKey = true,
                         ValidateAudience = false,
-                        IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(configuration.GetValue<string>("JWTValues:SecretKey")))
-                    };
+                        IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(Environment.GetEnvironmentVariable("JWT_SECRET_KEY")))
+                };
                 });
 
             services.AddApiVersioning(o =>
