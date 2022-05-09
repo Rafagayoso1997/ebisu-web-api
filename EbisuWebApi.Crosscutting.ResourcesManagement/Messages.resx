@@ -123,4 +123,7 @@
   <data name="UsernameAndPasswordIncorrect" xml:space="preserve">
     <value>El nombre de usuario o la contraseña son incorrectos</value>
   </data>
+  <data name="XssAttackDetected" xml:space="preserve">
+    <value>XSS injection detected from middleware.</value>
+  </data>
 </root>

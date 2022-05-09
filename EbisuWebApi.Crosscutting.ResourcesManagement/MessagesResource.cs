@@ -17,5 +17,13 @@ namespace EbisuWebApi.Crosscutting.ResourcesManagement
         {
             get { return Messages.UsernameAndPasswordIncorrect; }
         }
+
+        public static string XssAttackDetected
+        {
+            get { return Messages.XssAttackDetected; }
+        }
+        
+
+
     }
 }

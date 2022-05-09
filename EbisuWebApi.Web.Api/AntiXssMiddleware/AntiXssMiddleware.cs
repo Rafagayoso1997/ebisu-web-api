@@ -25,7 +25,7 @@ namespace EbisuWebApi.Web.Api.AntiXssMiddleware
 
                 if (raw != sanitised)
                 {
-                    throw new BadRequestException("XSS injection detected from middleware.");
+                    throw new BadRequestException();
                 }
             }
 
