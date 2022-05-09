@@ -14,6 +14,7 @@ using EbisuWebApi.Application.Services.Unit.Tests.Implementations;
 using EbisuWebApi.Domain.Entities;
 using EbisuWebApi.Infrastructure.DataModel;
 using EbisuWebApi.Application.Dtos;
+using EbisuWebApi.Crosscutting.Exceptions;
 
 namespace EbisuWebApi.Application.Services.Implementations.Unit.Tests
 {
@@ -72,10 +73,49 @@ namespace EbisuWebApi.Application.Services.Implementations.Unit.Tests
                Times.Once);
             _mockMapper.Verify(mapper => mapper.Map<UserDto>(It.IsAny<UserEntity>()),
                 Times.Once);
-
             Assert.AreEqual(UserFixtures.GetUserDto(), user);
            
             Assert.IsNotNull(user);
+        }
+
+        [TestMethod]
+        public async Task AddUserAsync_WhenWrongMail_ThrowsException()
+        {
+            //Arrange
+            UserDto userToInsert = new UserDto
+            {
+                UserId = 1,
+                UserName = "Rafa",
+                Password = "123456",
+                Email = "gayoso0597"
+            };
+            _mockUserDomainService.Setup(x => x.ValidateUserData(It.IsAny<UserDataModel>()))
+                .ThrowsAsync(new ArgumentException("Incorrect Mail"));
+            //Actual
+
+            //Assert
+            await Assert.ThrowsExceptionAsync<ArgumentException>(() => _userService.AddUserAsync(userToInsert));
+            _mockMapper.Verify(x => x.Map<UserDataModel>(It.IsAny<UserEntity>()), Times.Once);
+            _mockMapper.Verify(x => x.Map<UserEntity>(It.IsAny<UserDto>()), Times.Once);
+            _mockMapper.Verify(x => x.Map<It.IsAnyType>(It.IsAny<It.IsAnyType>()), Times.Exactly(2));
+            _mockUserDomainService.Verify(x => x.UserExist(It.IsAny<UserDataModel>()), Times.Never);
+           
+        }
+        [TestMethod]
+        public async Task AddUserAsync_WhenUserExists_ThrowsException()
+        {
+            UserDto userToInsert = new UserDto
+            {
+                UserId = 1,
+                UserName = "Rafa",
+                Password = "123456",
+                Email = "gayoso0597"
+            };
+
+            _mockUserDomainService.Setup(x => x.ValidateUserData(It.IsAny<UserDataModel>()))
+                .ThrowsAsync(new UserNameAlreadyExistException());
+
+            await Assert.ThrowsExceptionAsync<UserNameAlreadyExistException>(() => _userService.AddUserAsync(userToInsert));
         }
 
         [TestMethod()]
@@ -152,6 +192,11 @@ namespace EbisuWebApi.Application.Services.Implementations.Unit.Tests
             Assert.AreEqual(UserFixtures.GetUserDto(), user);
             Assert.IsNotNull(user);
         }
+
+
+        
     }
+
+
 
 }

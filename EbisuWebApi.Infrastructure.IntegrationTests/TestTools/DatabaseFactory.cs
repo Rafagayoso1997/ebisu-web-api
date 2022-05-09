@@ -10,14 +10,14 @@ namespace EbisuWebApi.Infrastructure.IntegrationTests.TestTools
 {
     public static class DatabaseFactory
     {
-        private const string _connectionString = "Server=localhost;Database=EbisuTest;Uid=root;Pwd=ebisu2022.;";
+        private const string _connectionString = "Server=localhost;Database=EbisuIntegrationTest;Uid=root;Pwd=ebisu2022.;";
 
         public static DatabaseContext CreateTestDatabase()
         {
             var serverVersion = new MySqlServerVersion(new Version(5, 6, 50));
             var options = new DbContextOptionsBuilder<DatabaseContext>().UseMySql(_connectionString, serverVersion).Options;
             var dbcontext = new DatabaseContext(options);
-
+            dbcontext.Database.Migrate();
             //TODO: añadir seeds
 
             return dbcontext;
