@@ -47,7 +47,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "6.Testing", "6.Testing", "{
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EbisuWebApi.Integration.UserServiceTest", "EbisuWebApi.Integration.UserServiceTest\EbisuWebApi.Integration.UserServiceTest.csproj", "{CD134C52-3900-4FE5-9B47-C5B0ACD38A80}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EbisuWebApi.Infrastructure.IntegrationTests", "EbisuWebApi.Infrastructure.IntegrationTests\EbisuWebApi.Infrastructure.IntegrationTests.csproj", "{0449365C-6B29-48EF-8DAC-D4E2E3E42ED7}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EbisuWebApi.Infrastructure.IntegrationTests", "EbisuWebApi.Infrastructure.IntegrationTests\EbisuWebApi.Infrastructure.IntegrationTests.csproj", "{0449365C-6B29-48EF-8DAC-D4E2E3E42ED7}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
