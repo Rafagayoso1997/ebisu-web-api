@@ -6,4 +6,8 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\EbisuWebApi.Crosscutting.ResourcesManagement\EbisuWebApi.Crosscutting.ResourcesManagement.csproj" />
+  </ItemGroup>
+
 </Project>

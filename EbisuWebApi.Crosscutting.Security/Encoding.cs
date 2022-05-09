@@ -1,26 +1,28 @@
-﻿using System.Security.Cryptography;
+﻿using EbisuWebApi.Crosscutting.ResourcesManagement;
+using System.Security.Cryptography;
 using System.Text;
 
 namespace EbisuWebApi.Crosscutting.Security
 {
     public static class Encoding
     {
+
+        private static byte[] ConvertStringIntoByteArray(string stringToConvert)
+        {
+            byte[] byteArray = ASCIIEncoding.ASCII.GetBytes(stringToConvert);
+            return byteArray;
+
+        }
         public static string EncryptStringToBytes_Aes(string stringToEncrypt)
         {
             byte[] encrypted;
 
             using (Aes aesAlgorithm = Aes.Create())
             {
-                byte[] IV = { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16 };
-                byte[] key = { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16 };
-                aesAlgorithm.Key = key;
-                aesAlgorithm.IV = IV;
 
-                //TODO:
-                ///////////////
-                //aesAlgorithm.Key = ResorcesManagement.ObtainKeyAES();
-                //aesAlgorithm.IV = ResorcesManagement.ObtainIVAES();
-                ////////////
+
+                aesAlgorithm.Key = ConvertStringIntoByteArray(EncryptResources.ObtainKeyAES());
+                aesAlgorithm.IV = ConvertStringIntoByteArray(EncryptResources.ObtainIVAES());
 
                 ICryptoTransform encryptor = aesAlgorithm.CreateEncryptor(aesAlgorithm.Key, aesAlgorithm.IV);
 
