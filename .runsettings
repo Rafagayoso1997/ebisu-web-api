@@ -4,7 +4,7 @@
 	<RunConfiguration>
 		<EnvironmentVariables>
 			<!-- List of environment variables we want to set-->
-			<DATABASE>EbisuTest</DATABASE>
+			<DATABASE_TEST>EbisuTest</DATABASE_TEST>
 			<HOST>localhost</HOST>
 			<PASSWORD_DB>ebisu2022.</PASSWORD_DB>
 			<USER_NAME>root</USER_NAME>

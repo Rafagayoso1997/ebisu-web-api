@@ -1,3 +1,5 @@
+using EbisuWebApi.Infrastructure.DataModel;
+using EbisuWebApi.Infrastructure.IntegrationTests.TestTools;
 using System;
 using System.Net.Http;
 using System.Net.Http.Headers;
@@ -6,7 +8,7 @@ using Xunit;
 
 namespace EbisuWebApi.Integration.UserServiceTest
 {
-    public class UserServiceTest : IClassFixture<TestingWebAppFactory<Program>>
+    public class UserServiceTest : IClassFixture<TestingWebAppFactory<Program>> 
     {
         private readonly HttpClient _client;
         private readonly string _token;

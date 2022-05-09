@@ -10,7 +10,7 @@ namespace EbisuWebApi.Application.Services.Configuration
 {
     public static class IoCServiceLayer
     {
-        private static readonly string connectionString = DatabaseConnection.ConnectionString();
+        private static readonly string connectionString = DatabaseConnection.DatabaseConnectionString();
         public static IServiceCollection ConfigureServicesLayer(this IServiceCollection services)
         {
 

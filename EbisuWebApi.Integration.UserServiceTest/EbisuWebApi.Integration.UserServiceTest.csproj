@@ -24,6 +24,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\EbisuWebApi.Infrastructure.IntegrationTests\EbisuWebApi.Infrastructure.IntegrationTests.csproj" />
     <ProjectReference Include="..\EbisuWebApi.Web.Api\EbisuWebApi.Web.Api.csproj" />
   </ItemGroup>
 

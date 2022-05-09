@@ -16,6 +16,7 @@
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development",
         "DATABASE": "Ebisu",
+        "DATABASE_TEST": "EbisuTest",
         "HOST": "localhost",
         "PASSWORD_DB": "ebisu2022.",
         "USER_NAME": "root",
@@ -37,6 +38,7 @@
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development",
         "DATABASE": "Ebisu",
+        "DATABASE_TEST": "EbisuTest",
         "HOST": "localhost",
         "PASSWORD_DB": "ebisu2022.",
         "USER_NAME": "root",
@@ -57,6 +59,7 @@
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development",
         "DATABASE": "Ebisu",
+        "DATABASE_TEST": "EbisuTest",
         "HOST": "localhost",
         "PASSWORD_DB": "ebisu2022.",
         "USER_NAME": "root",

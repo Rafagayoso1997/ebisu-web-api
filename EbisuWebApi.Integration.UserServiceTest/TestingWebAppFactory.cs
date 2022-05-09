@@ -14,7 +14,7 @@ namespace EbisuWebApi.Integration.UserServiceTest
 {
     public class TestingWebAppFactory<TEntryPoint> : WebApplicationFactory<Program> where TEntryPoint : Program
     {
-        private readonly string connectionString = DatabaseConnection.ConnectionString();
+        private readonly string connectionString = DatabaseConnection.DatabaseTestConnectionString();
         protected override void ConfigureWebHost(IWebHostBuilder builder)
         {
             builder.ConfigureServices(services =>
@@ -27,7 +27,7 @@ namespace EbisuWebApi.Integration.UserServiceTest
 
                 services.AddDbContext<DatabaseContext>(options =>
                 {
-                    options.UseMySql(connectionString, ServerVersion.AutoDetect(connectionString));
+                    options.UseInMemoryDatabase("EbisuTest");
                 });
 
                 var sp = services.BuildServiceProvider();

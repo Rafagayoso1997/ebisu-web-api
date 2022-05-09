@@ -1,4 +1,5 @@
-﻿using EbisuWebApi.Infrastructure.Persistence.DataBaseContext;
+﻿using EbisuWebApi.Crosscutting.ResourcesManagement;
+using EbisuWebApi.Infrastructure.Persistence.DataBaseContext;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -10,7 +11,7 @@ namespace EbisuWebApi.Infrastructure.IntegrationTests.TestTools
 {
     public static class DatabaseFactory
     {
-        private const string _connectionString = "Server=localhost;Database=EbisuIntegrationTest;Uid=root;Pwd=ebisu2022.;";
+        private readonly static string _connectionString = DatabaseConnection.DatabaseTestConnectionString();
 
         public static DatabaseContext CreateTestDatabase()
         {
