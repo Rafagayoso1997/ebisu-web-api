@@ -1,4 +1,5 @@
 using EbisuWebApi.Crosscutting.Utils;
+using EbisuWebApi.Web.Api.AntiXssMiddleware;
 using EbisuWebApi.Web.Api.Configuration;
 using EbisuWebApi.Web.Api.ExceptionMiddleware;
 using Microsoft.OpenApi.Models;
@@ -60,6 +61,8 @@ app.UseHttpsRedirection();
 app.UseAuthentication();
 
 app.UseMiddleware<ErrorHandlerMiddleware>();
+
+app.UseMiddleware<AntiXssMiddleware>();
 
 app.UseAuthorization();
 
