@@ -28,7 +28,7 @@ namespace EbisuWebApi.Infrastructure.IntegrationTests.TestTools
         public static DatabaseContext CreateInMemoryDatabase()
         {
             var options = new DbContextOptionsBuilder<DatabaseContext>().
-                UseInMemoryDatabase("EbisuTest")
+                UseInMemoryDatabase("EbisuMemoryTest")
                 .ConfigureWarnings(b => b.Ignore(InMemoryEventId.TransactionIgnoredWarning))
                 .Options;
             var dbcontext = new DatabaseContext(options);
