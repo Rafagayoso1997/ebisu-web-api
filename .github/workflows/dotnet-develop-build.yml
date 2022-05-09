@@ -8,7 +8,7 @@ on:
     
 env:
   HOST: ${{secrets.HOST}}
-  DATABASE: ${{secrets.DATABASE}}
+  DATABASE_TEST: ${{secrets.DATABASE_TEST}}
   USER_NAME: ${{secrets.USER_NAME}}
   PASSWORD_DB: ${{secrets.PASSWORD_DB}}
   JWT_SECRET_KEY: ${{ secrets.JWT_SECRET_KEY }}
@@ -22,7 +22,7 @@ jobs:
     - uses: mirromutth/mysql-action@v1.1
       with:
         mysql version: '5.6.50' # Optional, default value is "latest". The version of the MySQL
-        mysql database: $DATABASE # Optional, default value is "test". The specified database which will be create
+        mysql database: $DATABASE_TEST # Optional, default value is "test". The specified database which will be create
         mysql host: $HOST
         mysql root password: $PASSWORD_DB # Required if "mysql user" is empty, default is empty. The root superuser password
         mysql user: $USER_NAME # Required if "mysql root password" is empty, default is empty. The superuser for the specified database. Can use secrets, too
