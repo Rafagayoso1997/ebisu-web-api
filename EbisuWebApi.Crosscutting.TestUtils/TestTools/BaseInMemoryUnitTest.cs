@@ -1,4 +1,5 @@
-﻿using EbisuWebApi.Infrastructure.Persistence.DataBaseContext;
+﻿using EbisuWebApi.Infrastructure.IntegrationTests.TestTools;
+using EbisuWebApi.Infrastructure.Persistence.DataBaseContext;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
 using System.Collections.Generic;
@@ -6,17 +7,16 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace EbisuWebApi.Infrastructure.IntegrationTests.TestTools
+namespace EbisuWebApi.Crosscutting.TestUtils.TestTools
 {
-    //[TestClass]¿?
-    public class BaseIntegrationTests
+    public class BaseInMemoryUnitTest
     {
         protected DatabaseContext TestDbContext { get; private set; }
 
         [TestInitialize]
         public void Setup()
         {
-            TestDbContext = DatabaseFactory.CreateTestDatabase();
+            TestDbContext = DatabaseFactory.CreateInMemoryDatabase();
         }
 
         [TestCleanup]
