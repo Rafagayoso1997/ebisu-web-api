@@ -26,12 +26,18 @@ namespace EbisuWebApi.Application.Services.Implementations
             _categoryDomainService = categoryDomainService;
         }
 
-        public async Task<CategoryDto> AddCategoryAsync(CategoryDto categoryDto)
+        public async Task<CategoryDto> AddCategoryAsync(CategoryDto categoryDto, int userId)
         {
             CategoryDataModel entityDataModel = _mapper.Map<CategoryDataModel>(_mapper.Map<CategoryEntity>(categoryDto));
             
             await _categoryDomainService.ValidateCategoryData(entityDataModel);
+
             
+            var user = await _unitOfWork.Users.GetEntity(userId);
+            entityDataModel.Users = new List<UserDataModel>();
+            entityDataModel.Users.Add(user);
+
+            entityDataModel.IsDefault = false;
             var result = await _unitOfWork.Categories.Add(entityDataModel);
             _unitOfWork.Complete();
 
@@ -42,6 +48,11 @@ namespace EbisuWebApi.Application.Services.Implementations
         public async Task<IEnumerable<CategoryDto>> GetAll()
         {
             return _mapper.Map<IEnumerable<CategoryDto>>(_mapper.Map<IEnumerable<CategoryEntity>>(await _unitOfWork.Categories.GetAll()));
+        }
+
+        public async Task<IEnumerable<CategoryDto>> GetAllByUser(int userId)
+        {
+            return _mapper.Map<IEnumerable<CategoryDto>>(_mapper.Map<IEnumerable<CategoryEntity>>(await _unitOfWork.Categories.GetCategoriesbyUser(userId)));
         }
 
         public async Task<CategoryDto> GetById(int id)

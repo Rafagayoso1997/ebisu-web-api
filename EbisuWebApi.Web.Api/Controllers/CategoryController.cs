@@ -4,6 +4,8 @@ using FluentValidation;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using System.Security.Claims;
+
 namespace EbisuWebApi.Web.Api.Controllers
 {
     [Authorize]
@@ -23,17 +25,25 @@ namespace EbisuWebApi.Web.Api.Controllers
         [HttpPost]
         public async Task<IActionResult> SaveCategoryAsync(CategoryDto categoryDto)
         {
-
-            return Ok(await _categoryService.AddCategoryAsync(categoryDto));
+            int userId = int.Parse(User.Claims.FirstOrDefault(claim => claim.Type == ClaimTypes.NameIdentifier).Value);
+            return Ok(await _categoryService.AddCategoryAsync(categoryDto, userId));
 
         }
 
 
         [HttpGet]
-        public async Task<IActionResult> GetAllUsersAsync()
+        public async Task<IActionResult> GetAllCategoriesAsync()
         {
-
+            
             return Ok(await _categoryService.GetAll());
+
+        }
+
+        [HttpGet("GetByUser")]
+        public async Task<IActionResult> GetAllCategoriesByUserAsync()
+        {
+            int userId = int.Parse(User.Claims.FirstOrDefault(claim => claim.Type == ClaimTypes.NameIdentifier).Value);
+            return Ok(await _categoryService.GetAllByUser(userId));
 
         }
 
