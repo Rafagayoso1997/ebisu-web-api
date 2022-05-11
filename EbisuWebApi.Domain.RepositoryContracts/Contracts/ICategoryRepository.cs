@@ -11,5 +11,7 @@ namespace EbisuWebApi.Domain.RepositoryContracts.Contracts
     public interface ICategoryRepository : IGenericRepository<CategoryDataModel>
     {
         Task<IEnumerable<CategoryDataModel>> GetDefaultCategories();
+
+        Task<IEnumerable<CategoryDataModel>> GetCategoriesbyUser(int userId);
     }
 }

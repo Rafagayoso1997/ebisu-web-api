@@ -9,9 +9,11 @@ namespace EbisuWebApi.Application.Services.Contracts
 {
     public interface ICategoryService
     {
-        Task<CategoryDto> AddCategoryAsync(CategoryDto categoryDto);
+        Task<CategoryDto> AddCategoryAsync(CategoryDto categoryDto, int userId);
 
         Task<IEnumerable<CategoryDto>> GetAll();
+
+        Task<IEnumerable<CategoryDto>> GetAllByUser(int userId);
 
         Task<CategoryDto> GetById(int id);
 

@@ -16,7 +16,14 @@ namespace EbisuWebApi.Infrastructure.Repositories.Implementations
         public CategoryRepository(DatabaseContext context) : base(context)
         {
         }
-        
+
+        public async Task<IEnumerable<CategoryDataModel>> GetCategoriesbyUser(int userId)
+        {
+
+            return await _context.Categories.Where(category => category.Users.Any(user => user.UserId == userId)).ToListAsync();
+
+        }
+
         public async Task<IEnumerable<CategoryDataModel>> GetDefaultCategories()
         {
             return await _context.Categories.Where(c => c.IsDefault).ToListAsync();

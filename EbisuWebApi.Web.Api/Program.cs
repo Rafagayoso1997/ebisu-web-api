@@ -62,7 +62,7 @@ app.UseAuthentication();
 
 app.UseMiddleware<ErrorHandlerMiddleware>();
 
-app.UseMiddleware<AntiXssMiddleware>();
+//app.UseMiddleware<AntiXssMiddleware>();
 
 app.UseAuthorization();
 

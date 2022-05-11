@@ -15,7 +15,7 @@ public class CategoryDataModelValidator : AbstractValidator<CategoryDataModel>
     public CategoryDataModelValidator()
     {
         RuleFor(category => category.Name)
-            .Length(1, 10)
+            .MinimumLength(3)
             .NotEmpty()
             .WithMessage("A Category name is Required");
 
