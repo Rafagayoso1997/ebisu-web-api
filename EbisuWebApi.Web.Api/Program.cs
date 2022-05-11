@@ -1,3 +1,5 @@
+using EbisuWebApi.Application.Services.Contracts;
+using EbisuWebApi.Application.Services.Implementations;
 using EbisuWebApi.Crosscutting.Utils;
 using EbisuWebApi.Web.Api.AntiXssMiddleware;
 using EbisuWebApi.Web.Api.Configuration;
@@ -13,7 +15,6 @@ builder.WebHost.UseKestrel(options => options.AddServerHeader = false);
 
 builder.Services.AddControllers();
 builder.Services.ConfigureWebAPILayer(builder.Configuration);
-
 
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
@@ -31,17 +32,13 @@ builder.Services.AddSwaggerGen(options =>
 });
 
 
-
-//Log.Logger = new LoggerConfiguration()
-  //                          .ReadFrom.Configuration(builder.Configuration)
-    //                        .Enrich.FromLogContext()
-      //                      .CreateLogger();
-
 builder.Host.UseSerilog( (context, configuration) =>
     configuration.ReadFrom.Configuration(context.Configuration)
 );
 
 var app = builder.Build();
+
+
 
 // Configure the HTTP request pipeline.
 //if (app.Environment.IsDevelopment())

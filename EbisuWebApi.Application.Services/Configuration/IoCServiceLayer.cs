@@ -30,7 +30,7 @@ namespace EbisuWebApi.Application.Services.Configuration
             services.BuildServiceProvider().GetService<DatabaseContext>().Database.MigrateAsync();
 
             services.ConfigureDomainLayer();
-            
+
             return services;
         }
     }
