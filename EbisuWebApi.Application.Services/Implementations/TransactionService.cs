@@ -32,6 +32,13 @@ namespace EbisuWebApi.Application.Services.Implementations
 
             await _transactionDomainService.ValidateTransactionData(transactionDataModel);
 
+            var user = await _unitOfWork.Users.GetEntity(transactionDataModel.UserId);
+
+            var category = await _unitOfWork.Categories.GetEntity(transactionDataModel.CategoryId);
+
+            transactionDataModel.User = user;
+            transactionDataModel.Category = category;
+
             var result = await _unitOfWork.Transactions.Add(transactionDataModel);
             _unitOfWork.Complete();
 

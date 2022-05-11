@@ -26,7 +26,8 @@ namespace EbisuWebApi.Web.Api.Controllers
         [HttpPost]
         public async Task<IActionResult> SaveTransactionAsync(TransactionDto transactionDTO)
         {
-
+            int userId = int.Parse(User.Claims.FirstOrDefault(claim => claim.Type == ClaimTypes.NameIdentifier).Value);
+            transactionDTO.UserId = userId;
             return Ok(await _transactionService.AddTransactionAsync(transactionDTO));
 
         }
