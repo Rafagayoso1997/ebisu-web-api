@@ -27,7 +27,7 @@ public class CategoryDataModelValidator : AbstractValidator<CategoryDataModel>
         RuleFor(category => category.ImageUrl)
             .NotNull()
             .NotEmpty()
-            .Length(1, 10)
+            .MinimumLength(3)
             .WithMessage("A Category Image URL is Required");
     }
 }
