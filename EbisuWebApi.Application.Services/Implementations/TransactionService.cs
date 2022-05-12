@@ -73,7 +73,10 @@ namespace EbisuWebApi.Application.Services.Implementations
             var entityDataModel = _mapper.Map<TransactionDataModel>(_mapper.Map<TransactionEntity>(transactionDTO));
             
             await _transactionDomainService.ValidateTransactionData(entityDataModel);
-            
+
+            var category = await _unitOfWork.Categories.GetEntity(entityDataModel.CategoryId);
+            entityDataModel.Category = category;
+
             var result = await _unitOfWork.Transactions.Update(entityDataModel);
             _unitOfWork.Complete();
 
