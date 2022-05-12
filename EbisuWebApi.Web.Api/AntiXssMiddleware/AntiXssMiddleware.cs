@@ -20,6 +20,7 @@ namespace EbisuWebApi.Web.Api.AntiXssMiddleware
             using (var streamReader = new StreamReader(httpContext.Request.Body, Encoding.UTF8, leaveOpen: true))
             {
                 var raw = await streamReader.ReadToEndAsync();
+                raw = raw.Replace("\r\n", "");
                 var sanitiser = new HtmlSanitizer();
                 var sanitised = sanitiser.Sanitize(raw);
 
