@@ -1,0 +1,15 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\EbisuWebApi.Crosscutting.Security\EbisuWebApi.Crosscutting.Security.csproj" />
+    <ProjectReference Include="..\EbisuWebApi.Domain.Entities\EbisuWebApi.Domain.Entities.csproj" />
+    <ProjectReference Include="..\EbisuWebApi.Infrastructure.DataModel\EbisuWebApi.Infrastructure.DataModel.csproj" />
+  </ItemGroup>
+
+</Project>
